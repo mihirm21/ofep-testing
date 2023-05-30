@@ -17,24 +17,24 @@ release = '2'
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-extensions = ["myst_parser",
-  "sphinx_design",]
+# extensions = ["myst_parser",
+#   "sphinx_design",]
 
-myst_enable_extensions = [
-    "amsmath",
-    "colon_fence",
-    "deflist",
-    "dollarmath",
-    "fieldlist",
-    "html_admonition",
-    "html_image",
-    "linkify",
-    "replacements",
-    "smartquotes",
-    "strikethrough",
-    "substitution",
-    "tasklist",
-]
+# myst_enable_extensions = [
+#     "amsmath",
+#     "colon_fence",
+#     "deflist",
+#     "dollarmath",
+#     "fieldlist",
+#     "html_admonition",
+#     "html_image",
+#     "linkify",
+#     "replacements",
+#     "smartquotes",
+#     "strikethrough",
+#     "substitution",
+#     "tasklist",
+# ]
 
 templates_path = ['_templates']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
