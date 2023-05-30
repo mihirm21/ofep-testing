@@ -9,7 +9,7 @@
 project = 'ofep-testing'
 copyright = '2023, Mihir Mittal'
 author = 'Mihir Mittal'
-release = '1'
+release = '2'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
