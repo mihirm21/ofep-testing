@@ -5,39 +5,19 @@
 
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
-import os
-import sys
-sys.path.insert(0, os.path.abspath('.'))
 
-project = 'ofep-testing'
+project = 'OFEP-TESTING'
 copyright = '2023, Mihir Mittal'
 author = 'Mihir Mittal'
-release = '2'
+release = '1'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-# extensions = ["myst_parser",
-#   "sphinx_design",]
-
-# myst_enable_extensions = [
-#     "amsmath",
-#     "colon_fence",
-#     "deflist",
-#     "dollarmath",
-#     "fieldlist",
-#     "html_admonition",
-#     "html_image",
-#     "linkify",
-#     "replacements",
-#     "smartquotes",
-#     "strikethrough",
-#     "substitution",
-#     "tasklist",
-# ]
+extensions = ["myst_parser"]
 
 templates_path = ['_templates']
-exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
+exclude_patterns = []
 
 
 

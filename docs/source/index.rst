@@ -1,9 +1,9 @@
-.. ofep-testing documentation master file, created by
-   sphinx-quickstart on Tue May 30 16:12:24 2023.
+.. OFEP-TESTING documentation master file, created by
+   sphinx-quickstart on Sat Jun  3 19:08:30 2023.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to ofep-testing's documentation!
+Welcome to OFEP-TESTING's documentation!
 ========================================
 
 .. toctree::
