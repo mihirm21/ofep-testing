@@ -3,8 +3,7 @@ build:
   os: "ubuntu-22.04"
   tools:
     python: "3.10"
-    install:
-      - pip install myst-parser
-  # jobs:
-  #   pre_install:
-  #     - bash ./scripts/pre_install.sh
+    
+  jobs:
+    pre_install:
+      - pip3 install myst-parser
