@@ -17,7 +17,9 @@ for filename in os.listdir(source_directory):
     if filename.endswith('.md'):
         source_file_path = os.path.join(source_directory, filename)
         destination_file_path = os.path.join(destination_directory, filename)
-        shutil.copyfile(source_file_path, destination_file_path)
+        if os.path.exists(destination_file_path):
+            os.remove(destination_file_path)
+        shutil.copy2(source_file_path, destination_file_path)
         print(f"Copied {source_file_path} to {destination_file_path}")
 
 print("Copying completed.")

@@ -1,51 +1,96 @@
-
 <!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-
-    <title>Provider to client mapping &#8212; OFEP-TESTING 1 documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/sphinx_highlight.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Provider to client mapping &mdash; OFEP-TESTING 1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
-   
-  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
 
-  </head><body>
-  
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
           
+          
+          <a href="index.html" class="icon icon-home">
+            OFEP-TESTING
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Provider to client mapping</a></li>
+<li><a class="reference internal" href="#state-approved">State: APPROVED</a></li>
+<li><a class="reference internal" href="#background">Background</a></li>
+<li><a class="reference internal" href="#proposal">Proposal</a><ul>
+<li><a class="reference internal" href="#example-implementation">Example Implementation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
 
-          <div class="body" role="main">
-            
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">OFEP-TESTING</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Provider to client mapping</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/015-OFEP-provider-client-mapping.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
   <section id="provider-to-client-mapping">
-<h1>Provider to client mapping<a class="headerlink" href="#provider-to-client-mapping" title="Permalink to this heading">¶</a></h1>
+<h1>Provider to client mapping<a class="headerlink" href="#provider-to-client-mapping" title="Permalink to this heading"></a></h1>
 </section>
 <section id="state-approved">
-<h1>State: APPROVED<a class="headerlink" href="#state-approved" title="Permalink to this heading">¶</a></h1>
+<h1>State: APPROVED<a class="headerlink" href="#state-approved" title="Permalink to this heading"></a></h1>
 <p>The goal of this OFEP is to describe a way that application authors can selectively determine which provider a given client uses. This means that they should be able to set a provider for a library that is different than what they use in their main app.</p>
 </section>
 <section id="background">
-<h1>Background<a class="headerlink" href="#background" title="Permalink to this heading">¶</a></h1>
+<h1>Background<a class="headerlink" href="#background" title="Permalink to this heading"></a></h1>
 <p>Today, we operate with <a class="reference external" href="https://github.com/open-feature/spec/blob/74c373e089ad77bf8cac84f3d93c00c945ff3a8a/specification/sections/01-flag-evaluation.md?plain=1#L25">a single provider stored on a global singleton</a>. Especially in large apps, which may have different provider needs, this is limiting. Teams could solve this in user-space with a sort of <code class="docutils literal notranslate"><span class="pre">MultiplexingProvider</span></code> which takes in N other providers. Sadly, this introduces latency (calling provider 1 before falling through to provider 2 isn’t free) and waste. Additionally, when it comes to testing, the “there can be only one!” nature of global singletons makes things a giant pain.</p>
 </section>
 <section id="proposal">
-<h1>Proposal<a class="headerlink" href="#proposal" title="Permalink to this heading">¶</a></h1>
+<h1>Proposal<a class="headerlink" href="#proposal" title="Permalink to this heading"></a></h1>
 <p>To address that, we will allow application authors to provide mappings of client names to a provider of their choosing. This should allow a great degree of flexibility for app authors to choose the flag-config store that works for that particular use-case.</p>
 <section id="example-implementation">
-<h2>Example Implementation<a class="headerlink" href="#example-implementation" title="Permalink to this heading">¶</a></h2>
+<h2>Example Implementation<a class="headerlink" href="#example-implementation" title="Permalink to this heading"></a></h2>
 <p>Authors may optionally use <a class="reference external" href="https://github.com/open-feature/spec/blob/74c373e089ad77bf8cac84f3d93c00c945ff3a8a/specification/sections/01-flag-evaluation.md?plain=1#L60">a named client</a>, which we already support. If they don’t pick a name, it falls through to the configured “default” provider (or no provider if none are set).</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span># example library code
 var client = OpenFeature.getInstance().getClient(&#39;my-sweet-library&#39;)
@@ -64,66 +109,31 @@ if client.getBooleanValue(&#39;redesign-enabled?&#39;, false) {
 </section>
 
 
+           </div>
           </div>
-          
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Mihir Mittal.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="index.html">OFEP-TESTING</a></h1>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
 
-
-
-
-
-
-
-
-<h3>Navigation</h3>
-
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="index.html">Documentation overview</a><ul>
-  </ul></li>
-</ul>
-</div>
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</div>
-<script>document.getElementById('searchbox').style.display = "block"</script>
-
-
-
-
-
-
-
-
-        </div>
-      </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="footer">
-      &copy;2023, Mihir Mittal.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 6.2.1</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
-      
-      |
-      <a href="_sources/015-OFEP-provider-client-mapping.md.txt"
-          rel="nofollow">Page source</a>
-    </div>
-
-    
-
-    
-  </body>
+</body>
 </html>

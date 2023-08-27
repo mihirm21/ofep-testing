@@ -1,40 +1,89 @@
-
 <!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-
-    <title>Transaction Context Propagation &#8212; OFEP-TESTING 1 documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/sphinx_highlight.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Transaction Context Propagation &mdash; OFEP-TESTING 1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
-   
-  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
 
-  </head><body>
-  
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
           
+          
+          <a href="index.html" class="icon icon-home">
+            OFEP-TESTING
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Transaction Context Propagation</a></li>
+<li><a class="reference internal" href="#state-approved">State: APPROVED</a></li>
+<li><a class="reference internal" href="#background">Background</a></li>
+<li><a class="reference internal" href="#proposal">Proposal</a><ul>
+<li><a class="reference internal" href="#register-transaction-context-propagator">Register Transaction Context Propagator</a></li>
+<li><a class="reference internal" href="#set-transaction-context">Set Transaction Context</a></li>
+<li><a class="reference internal" href="#get-transaction-context">Get Transaction Context</a></li>
+<li><a class="reference internal" href="#context-merge-order">Context Merge Order</a></li>
+<li><a class="reference internal" href="#implementation">Implementation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
 
-          <div class="body" role="main">
-            
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">OFEP-TESTING</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Transaction Context Propagation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/011-OFEP-transaction-context-propagation.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
   <section id="transaction-context-propagation">
-<h1>Transaction Context Propagation<a class="headerlink" href="#transaction-context-propagation" title="Permalink to this heading">¶</a></h1>
+<h1>Transaction Context Propagation<a class="headerlink" href="#transaction-context-propagation" title="Permalink to this heading"></a></h1>
 </section>
 <section id="state-approved">
-<h1>State: APPROVED<a class="headerlink" href="#state-approved" title="Permalink to this heading">¶</a></h1>
+<h1>State: APPROVED<a class="headerlink" href="#state-approved" title="Permalink to this heading"></a></h1>
 <p>Flag evaluation may be affected by <a class="reference external" href="https://openfeature.dev/docs/specification/sections/evaluation-context">evaluation context</a> data including global, client, invocation, and hook context.
 Currently, developers are responsible for explicitly defining and supplying evaluation context during flag evaluation.
 This proposal defines a new type of evaluation context called transaction context.</p>
@@ -45,14 +94,14 @@ Propagating evaluation context to child processes or services is out of scope of
 However, a proof of concept for how OpenTelemetry baggage could be leverage can be found <a class="reference external" href="https://github.com/open-feature/playground/pull/142">here</a>.</p>
 </section>
 <section id="background">
-<h1>Background<a class="headerlink" href="#background" title="Permalink to this heading">¶</a></h1>
+<h1>Background<a class="headerlink" href="#background" title="Permalink to this heading"></a></h1>
 <p>Many languages provide a mechanism for storing data for the length of a single transaction. This can be used to store transaction context that can be automatically merged with the evaluation context before flag evaluation. The implementation will vary by technology. For example, Java may use <a class="reference external" href="https://docs.oracle.com/javase/8/docs/api/java/lang/ThreadLocal.html">ThreadLocal</a>, Golang may use <a class="reference external" href="https://pkg.go.dev/context">Go Context</a>, and Node may use <a class="reference external" href="https://nodejs.org/api/async_hooks.html">async hooks</a>.</p>
 </section>
 <section id="proposal">
-<h1>Proposal<a class="headerlink" href="#proposal" title="Permalink to this heading">¶</a></h1>
+<h1>Proposal<a class="headerlink" href="#proposal" title="Permalink to this heading"></a></h1>
 <p>This proposal introduces a way to register a transaction context propagator to the global OpenFeature API. Once registered, transaction context can be augmented or mutated at any point in the transaction. When a flag is evaluated, the transaction context is merged with evaluation context based on the merge order defined below.</p>
 <section id="register-transaction-context-propagator">
-<h2>Register Transaction Context Propagator<a class="headerlink" href="#register-transaction-context-propagator" title="Permalink to this heading">¶</a></h2>
+<h2>Register Transaction Context Propagator<a class="headerlink" href="#register-transaction-context-propagator" title="Permalink to this heading"></a></h2>
 <p>In some runtimes (e.g. node), there isn’t a native solution for transaction context propagation that would work in all situations. For that reason, it would be beneficial to provide the ability to register a transaction propagator on the global OpenFeature API.</p>
 <div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * An example transaction context manager that utilizes async_hooks added in</span>
@@ -80,7 +129,7 @@ However, a proof of concept for how OpenTelemetry baggage could be leverage can 
 </div>
 </section>
 <section id="set-transaction-context">
-<h2>Set Transaction Context<a class="headerlink" href="#set-transaction-context" title="Permalink to this heading">¶</a></h2>
+<h2>Set Transaction Context<a class="headerlink" href="#set-transaction-context" title="Permalink to this heading"></a></h2>
 <p>Setting transaction context will vary based on the language. In JavaScript, it may look like this:</p>
 <div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * This example is based on an express middleware.</span>
@@ -97,11 +146,11 @@ However, a proof of concept for how OpenTelemetry baggage could be leverage can 
 </div></blockquote>
 </section>
 <section id="get-transaction-context">
-<h2>Get Transaction Context<a class="headerlink" href="#get-transaction-context" title="Permalink to this heading">¶</a></h2>
+<h2>Get Transaction Context<a class="headerlink" href="#get-transaction-context" title="Permalink to this heading"></a></h2>
 <p>Getting transaction context happens automatically in the OpenFeature client before flag evaluation occurs.</p>
 </section>
 <section id="context-merge-order">
-<h2>Context Merge Order<a class="headerlink" href="#context-merge-order" title="Permalink to this heading">¶</a></h2>
+<h2>Context Merge Order<a class="headerlink" href="#context-merge-order" title="Permalink to this heading"></a></h2>
 <p>Transaction context merging should happen between global context and client context. This provides a reasonable balance between context inheritance and the ability to override context properties.</p>
 <div class="highlight-mermaid notranslate"><div class="highlight"><pre><span></span>flowchart LR
   global(&quot;API (global)&quot;)
@@ -117,7 +166,7 @@ However, a proof of concept for how OpenTelemetry baggage could be leverage can 
 </div>
 </section>
 <section id="implementation">
-<h2>Implementation<a class="headerlink" href="#implementation" title="Permalink to this heading">¶</a></h2>
+<h2>Implementation<a class="headerlink" href="#implementation" title="Permalink to this heading"></a></h2>
 <ul class="simple">
 <li><p>[X] <a class="reference external" href="https://github.com/open-feature/js-sdk/pull/212">Example implementation in Node</a></p></li>
 <li><p>[ ] Example implementation in Golang</p></li>
@@ -126,66 +175,31 @@ However, a proof of concept for how OpenTelemetry baggage could be leverage can 
 </section>
 
 
+           </div>
           </div>
-          
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Mihir Mittal.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="index.html">OFEP-TESTING</a></h1>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
 
-
-
-
-
-
-
-
-<h3>Navigation</h3>
-
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="index.html">Documentation overview</a><ul>
-  </ul></li>
-</ul>
-</div>
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</div>
-<script>document.getElementById('searchbox').style.display = "block"</script>
-
-
-
-
-
-
-
-
-        </div>
-      </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="footer">
-      &copy;2023, Mihir Mittal.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 6.2.1</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
-      
-      |
-      <a href="_sources/011-OFEP-transaction-context-propagation.md.txt"
-          rel="nofollow">Page source</a>
-    </div>
-
-    
-
-    
-  </body>
+</body>
 </html>
