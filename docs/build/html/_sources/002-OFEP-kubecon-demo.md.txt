@@ -9,7 +9,7 @@ tags: [spec, specification, sdk]
 ---
 # 002-OFEP-kubecon-demo
 
-## State: APPROVED
+### State: APPROVED
 
 I believe we need to have some really good examples of feature-flagging on both the client/developer side and also used in infrastructure scenarios.
 
@@ -24,14 +24,14 @@ Comments welcome.
 
 <img src="images/002-01.png" width="300">
 
-## Work involved
+### Work involved
 
 - Write a CUE based ievaluator
 - Extend Openfeature operator to read CUE based configuration
 - Write the demo image admission controller
 
 
-## End-user takeaways
+### End-user takeaways
 
 Featureflags can be used at the infrastructure level
 OpenFeature operator and FlagD allow you to build against them with no real work required to integrate ( evaluator included ).

@@ -26,7 +26,6 @@ status_to_ofeps = {
 script_directory = os.path.dirname(__file__)
 script_directory = os.path.join(script_directory, 'source')
 
-
 # Iterate through the files in the script's directory
 index_content = "# OFEP Index\n"
 
@@ -36,12 +35,16 @@ for filename in os.listdir(script_directory):
             md_content = file.read()
             frontmatter = parse_frontmatter(md_content)
             ofep_status = frontmatter.get('status', 'Unknown')
-            
+
             if ofep_status in status_to_ofeps:
                 authors_list = ', '.join([author.strip() for author in re.findall(r'\[(.*?)\]', frontmatter.get('authors', ''))])
                 tags_list = ', '.join([tag.strip() for tag in re.findall(r'\[(.*?)\]', frontmatter.get('tags', ''))])
-                status_to_ofeps[ofep_status].append((frontmatter['OFEP'], frontmatter['title'], authors_list, tags_list, filename))
-            
+                status_to_ofeps[ofep_status].append((int(frontmatter['OFEP']), frontmatter['title'], authors_list, tags_list, filename))
+
+# Sort OFEPs in each category by OFEP number
+for status, ofeps in status_to_ofeps.items():
+    status_to_ofeps[status] = sorted(ofeps, key=lambda x: x[0])
+
 # Generate the index content with the table
 index_content += "\n"
 
@@ -63,5 +66,3 @@ with open(index_path, 'w') as index_file:
     index_file.write(index_content)
 
 print(f"Index generated successfully at {index_path}.")
-
-

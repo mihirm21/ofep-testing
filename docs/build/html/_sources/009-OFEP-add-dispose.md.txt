@@ -9,11 +9,11 @@ tags: [spec, specification, sdk]
 ---
 # Add dispose functionality to API
 
-## State: APPROVED
+### State: APPROVED
 
 The goal of this OFEP is to enhance the OpenFeature API to allow authors to cleanly dispose of any resources consumed by OpenFeature providers.
 
-## Background
+### Background
 
 When implementing OpenFeature providers, you sometimes need to register event handlers, or timers or similar functionality to
 correctly handle functionality of the vendor library. Some vendor libraries might also have analytics, or debugging functionality
@@ -21,14 +21,14 @@ that can be enabled and might get flushed to the vendor platform when the librar
 
 Currently, you aren't able to cleanly handle these use cases in OpenFeature providers.
 
-## Proposal
+### Proposal
 
 To allow clean disposal of resources consumed by OpenFeature providers, I would like to propose a function that can be called by OpenFeature SDK that allow to cleanup these resources.
 The OpenFeature provider will implement a similar function that will be called internally by the OpenFeature SDK.
 The function may be synchronous or asynchronous, as SDK practicalities and language idioms dictate.
 In order to facilitate resource disposal paradigms of the implementing language, the precise name of the function won't be specified.
  
-### Example Implementation
+#### Example Implementation
 
 The `Provider` interfaces gets extended (in a non-breaking way) to include the following function:
 

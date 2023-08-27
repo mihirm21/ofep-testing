@@ -9,7 +9,7 @@ tags: [spec, specification, sdk]
 ---
 # 003-OFEP-CUE-upstream
 
-## State: DRAFTING
+### State: DRAFTING
 
 As flagD evolves, it will be presented on different types of services with a variety of protocols.
 Many of these protocols have client libraries that can be generated for convenience.
