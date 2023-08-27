@@ -21,6 +21,7 @@ content += '\n'.join([ofep_file[:-3] for ofep_file in ofep_files])
 # Write the content to ofep_docs.rst in the output directory
 output_file_path = os.path.join(destination_directory, 'ofep_docs.rst')
 with open(output_file_path, 'w') as file:
+    file.truncate(0)
     file.write(content)
 
 print(f"Generated {output_file_path}")

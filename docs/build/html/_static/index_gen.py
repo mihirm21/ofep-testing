@@ -57,6 +57,8 @@ for status, ofeps in status_to_ofeps.items():
 
 # Write the index to a file
 index_path = os.path.join(script_directory, 'OFEP_Index.md')
+if os.path.exists(index_path):
+    os.remove(index_path)
 with open(index_path, 'w') as index_file:
     index_file.write(index_content)
 
