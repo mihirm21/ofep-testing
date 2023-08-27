@@ -35,9 +35,10 @@ extensions = [
     'ofep_sphinx_extension.ofep_extension',
 ]
 # -- Custom script execution -------------------------------------------------
-index_gen_path = os.path.join(parent_dir,'docs', 'index_gen.py')  # Update this path
-generate_ofep_docs_path = os.path.join(parent_dir,'docs', 'generate_ofep_docs_rst.py')  # Update this path
 copy_files_path = os.path.join(parent_dir,'docs', 'copy_files.py')  # Update this path
+index_gen_path = os.path.join(parent_dir,'docs', 'index_gen.py')  # Update this path
+copy_files_path = os.path.join(parent_dir,'docs', 'copy_files.py')  # Update this path
+generate_ofep_docs_path = os.path.join(parent_dir,'docs', 'generate_ofep_docs_rst.py')  # Update this path
 
 if not os.path.exists('_build'):
     os.makedirs('_build')
