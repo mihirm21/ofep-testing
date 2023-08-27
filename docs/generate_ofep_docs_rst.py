@@ -16,7 +16,7 @@ if not os.path.exists(destination_directory):
 ofep_files = [file for file in os.listdir(source_directory) if file.endswith('.md')]
 
 # Generate the content for ofep_docs.rst
-content = '.. toctree::\n   :maxdepth: 1\n   :caption: OFEP Documentation\n\n   '
+content = '.. toctree::\n   :titlesonly:\n   :maxdepth: 1\n   :caption: OFEP Documentation\n\n   '
 content += '\n   '.join([ofep_file[:-3] for ofep_file in ofep_files])
 # Write the content to ofep_docs.rst in the output directory
 output_file_path = os.path.join(destination_directory, 'ofep_docs.rst')

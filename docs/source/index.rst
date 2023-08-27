@@ -7,6 +7,7 @@ Welcome to OFEP-TESTING's documentation!
 ========================================
 
 .. toctree::
+   :titlesonly:
    :maxdepth: 2
 
    ofep_docs
