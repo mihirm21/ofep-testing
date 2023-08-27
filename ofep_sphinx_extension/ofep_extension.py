@@ -11,8 +11,9 @@ def run_scripts(app):
 
     # Path to the scripts
     index_gen_script = os.path.join(docs_dir, 'index_gen.py')
-    generate_ofep_docs_rst_script = os.path.join(docs_dir, 'generate_ofep_docs_rst.py')
     copy_files_script = os.path.join(docs_dir, 'copy_files.py')
+    generate_ofep_docs_rst_script = os.path.join(docs_dir, 'generate_ofep_docs_rst.py')
+    
 
     # Destination directory for copying scripts
     output_dir = os.path.join(app.outdir, '_static')

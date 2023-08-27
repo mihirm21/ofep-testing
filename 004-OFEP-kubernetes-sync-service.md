@@ -7,9 +7,9 @@ authors: [Michael Beemer, David Hirsch]
 tags: [spec, specification, sdk]
 
 ---
-## 004-OFEP-inotfiy-interface
+# 004-OFEP-inotfiy-interface
 
-## State: APPROVED
+### State: APPROVED
 
 FlagD is often used in the context of Kubernetes.
 
@@ -23,7 +23,7 @@ This is not a silverbullet and I think for academic purposes alone it is worth e
 
 _Benefits to be discussed within this document_
 
-## Design
+### Design
 
 FlagD would start with the typical arguments of flagd start --sync-service kubernetes.
 This would use the token mounted from /var/run/secrets/kubernetes.io/serviceaccount to request to watch events for the FeatureFlagConfiguration. The FeatureFlagConfiguration could be determined by the pod getting its own annotations on start through the API and performing a look-up.
@@ -41,7 +41,7 @@ type ISync interface {
 
 <img src="images/004-01.png" width="650px;">
 
-### Realtime updates
+#### Realtime updates
 - Shared informer factory will need to be extended to support the FeatureFlagConfiguration type through the restful API.
 ```
 queue := workqueue.NewRateLimitingQueue(workqueue.DefaultControllerRateLimiter())
@@ -65,12 +65,12 @@ I believe a _sharedinformer_ might be appropriate over indexed, unless we're loo
 <img src="images/004-02.png" width="850px;">
 
 
-## Benefits
+### Benefits
 
 - Near real-time updates to flags as described within a Custom resource
 - Lays foundation for watching of specific flagD feature configuration types _as per previous issue discussions_
 
-## Caveats
+### Caveats
 - Creates a deep reference to Open feature operator
 - Requires the design of failures modes for deletion of custom resources.
 - Additional load on the API Server

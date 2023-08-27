@@ -7,20 +7,20 @@ authors: [Michael Beemer, David Hirsch]
 tags: [spec, specification, sdk]
 
 ---
-## 005-OFEP-provider-hook.md
+# 005-OFEP-provider-hook.md
 
-## State: APPROVED
+### State: APPROVED
 
 As a part of the Provider implementation by the Flag Management Systen, there is a need to have standardized support for hooks specific to the Provider. The 
 Provider Hook(s) should be specific to the provider implementation and implement the various defined stages of the Hook interface as applicable to the 
 specific provider. 
 
-## Assumptions
+### Assumptions
 
 The Provider Hook is transparent to the application developer. The Provider may choose to document certain default behavior/feature in specific stages of the 
 Provider Hook as relevant to the application and the application developer may be allowed to override the default feature. 
 
-## Example Use Case
+### Example Use Case
 
 Flag Management System X provides the option to add Experimentation as an extension of Feature Flag. The user creates a Feature Flag, runs basic on/off 
 evaluations of the Feature targeting specific audience and then wants to run A/B tests and hence adds the Experimentation aspects to the Feature Flag.
@@ -36,7 +36,7 @@ to do the following for each evaluation
 For applications not required to override the default behavior, there is no extra step needed to add any other hooks. The Provider Hook is transparent to 
 the application developer.
 
-## Example Workflow
+### Example Workflow
 
 1. At the time of registering the provider (OpenFeature.setProvider), Provider implementation can register one or more Provider Hook(s)
 2. Provider Hook implements the _before_ and _after_ and any other relevant stages to run the relevant provider logic.
@@ -45,7 +45,7 @@ the application developer.
 5. If needed, the application developer uses the invocation hook to override specific default behavior of the provider by using Hook Hints e.g. turn off 
    default event publish behavior
 
-## Hook Ordering
+### Hook Ordering
 
 The Hooks should be executed in specific order.
 
