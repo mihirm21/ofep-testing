@@ -1,0 +1,182 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>007-OFEP-flag-change-events &#8212; OFEP-TESTING 1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="ofep-flag-change-events">
+<h1>007-OFEP-flag-change-events<a class="headerlink" href="#ofep-flag-change-events" title="Permalink to this heading">¶</a></h1>
+</section>
+<section id="state-approved">
+<h1>State: APPROVED<a class="headerlink" href="#state-approved" title="Permalink to this heading">¶</a></h1>
+<p>Some flag SDKs support listening for flag value changes or general configuration changes (<a class="reference external" href="https://docs.launchdarkly.com/sdk/features/flag-changes">launchdarkly</a>, <a class="reference external" href="https://docs.cloudbees.com/docs/cloudbees-feature-management/latest/reporting/configuration-fetched-handler">cloudbees</a>, flagd). This can allow us to use an event-based paradigm for consuming flags. Client apps may use feature flags for characteristics that aren’t specifically tied to a user-action, making imperative flag evaluation a less-than-ideal solution. Web clients using frameworks such as React need a way to register a callback for when a provider has initialized, given that it’s not uncommon for a flag to be evaluated before the provider is ready (during page load). A server application could listen to a flag that changes some operational behavior.</p>
+<p>Examples:</p>
+<ul class="simple">
+<li><p>A web client’s banner color could be updated when an associated flag is changed, without any user action or a page reload.</p></li>
+<li><p>A service could subscribe to a flag that controls its global log-level.</p></li>
+<li><p>A subsystem could be restarted with the new flag value.</p></li>
+</ul>
+</section>
+<section id="design">
+<h1>Design<a class="headerlink" href="#design" title="Permalink to this heading">¶</a></h1>
+<p>The provider interface and the OpenFeature client would be extended to have new functionality to register handlers for a set of events defined by the SDK (<code class="docutils literal notranslate"><span class="pre">ProviderEvents</span></code>). When a consumer (<em>application integrator</em>, <em>application author</em>, <em>integration author</em>) registers a handler on a client, the client maintains this handler. The provider emits events or runs a callback indicating something happened, optionally providing data associated with that event. The callbacks registered with the client are then invoked with this data (<code class="docutils literal notranslate"><span class="pre">EventData</span></code>).</p>
+<p>In the case of the aforementioned flag systems, it is the consumer’s responsibility to evaluate any flags in response to the change - flag evaluation would not be automatically performed by the SDK. One reason is that no dynamic context can be reasonably provided in the case of events, since the event is driven by a change in the flag management system, not a user-action. In these cases, the <code class="docutils literal notranslate"><span class="pre">EventData</span></code> would not contain flag values and the application author would have to evaluate flags in the registered handler. This is consistent with the event APIs already existing in those systems.</p>
+<p>How it looks implemented in a Provider:</p>
+<div class="highlight-ts notranslate"><div class="highlight"><pre><span></span><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Provider</span><span class="p">,</span><span class="w"> </span><span class="nx">EventingProvider</span><span class="p">,</span><span class="w"> </span><span class="nx">ProviderEvents</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;./types&#39;</span><span class="p">;</span>
+
+<span class="kd">class</span><span class="w"> </span><span class="nx">MyEventingProvider</span><span class="w"> </span><span class="k">implements</span><span class="w"> </span><span class="nx">Provider</span><span class="p">,</span><span class="w"> </span><span class="nx">EventingProvider</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">readonly</span><span class="w"> </span><span class="nx">metadata</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;My Eventing Provider&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="kd">const</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// ...</span>
+
+<span class="w">  </span><span class="c1">// the SDK listens for events, and fires associated handlers the application-author adds.</span>
+<span class="w">  </span><span class="k">readonly</span><span class="w"> </span><span class="nx">events</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">EventEmitter</span><span class="p">();</span>
+
+<span class="w">  </span><span class="c1">// pollDataSource a conceptual method specific to this provider that fires a callback if the flag source-of-truth of this provider changes.</span>
+<span class="w">  </span><span class="k">this</span><span class="p">.</span><span class="nx">pollDataSource</span><span class="p">((</span><span class="nx">newFlagData</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="nx">ProviderEvents</span><span class="p">.</span><span class="nx">ConfigurationChanged</span><span class="p">,</span><span class="w"> </span><span class="nx">newFlagData</span><span class="p">))</span>
+
+<span class="w">  </span><span class="c1">// ...</span>
+</pre></div>
+</div>
+<p>How it looks for an <code class="docutils literal notranslate"><span class="pre">application</span> <span class="pre">author</span></code>:</p>
+<div class="highlight-ts notranslate"><div class="highlight"><pre><span></span><span class="nx">OpenFeature</span><span class="p">.</span><span class="nx">setProvider</span><span class="p">(</span><span class="ow">new</span><span class="w"> </span><span class="nx">MyEventingProvider</span><span class="p">());</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">client</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">OpenFeature</span><span class="p">.</span><span class="nx">getClient</span><span class="p">();</span>
+
+<span class="c1">// subscribe to ProviderEvents.ConfigurationChanged events</span>
+<span class="nx">client</span><span class="p">.</span><span class="nx">addHandler</span><span class="p">(</span><span class="nx">ProviderEvents</span><span class="p">.</span><span class="nx">ConfigurationChanged</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">eventData</span><span class="o">:</span><span class="w"> </span><span class="kt">EventData</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="kc">undefined</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">  </span><span class="c1">// see EventData below</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">eventData</span><span class="p">.</span><span class="nx">flagKeysChanged</span><span class="p">.</span><span class="nx">contains</span><span class="p">(</span><span class="s1">&#39;myFlagd&#39;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">onMyFlagChange</span><span class="p">();</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="nx">onAnyChange</span><span class="p">();</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>Hypothetical enumeration of events:</p>
+<div class="highlight-ts notranslate"><div class="highlight"><pre><span></span><span class="k">export</span><span class="w"> </span><span class="kd">enum</span><span class="w"> </span><span class="nx">ProviderEvents</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">Ready</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;PROVIDER_READY&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="ne">Error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;PROVIDER_ERROR&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">ConfigurationChanged</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;PROVIDER_CONFIGURATION_CHANGED&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">Shutdown</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;PROVIDER_SHUTDOWN&#39;</span><span class="p">,</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>Hypothetical structure of <code class="docutils literal notranslate"><span class="pre">EventData</span></code>:</p>
+<div class="highlight-ts notranslate"><div class="highlight"><pre><span></span><span class="k">export</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="nx">EventData</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">flagKeysChanged?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">[],</span>
+<span class="w">  </span><span class="nx">changeMetadata</span><span class="o">?:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">[</span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="c1">// similar to flag metadata</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="benefits">
+<h1>Benefits<a class="headerlink" href="#benefits" title="Permalink to this heading">¶</a></h1>
+<p>Ability to use event-based flag evaluation paradigms; attaching event handlers for specific occurrences. This is particularly useful for reacting to configuration changes, provider readiness, and errors. Such event-based models are particularly useful for web frameworks such as React and Angular.</p>
+</section>
+<section id="caveats">
+<h1>Caveats<a class="headerlink" href="#caveats" title="Permalink to this heading">¶</a></h1>
+<ul class="simple">
+<li><p>Not all providers can reasonably implement this… some SDKs don’t support subscriptions, for example. Should these providers simply never fire events? I’ve attempted to partially address this with: https://github.com/open-feature/ofep/pull/36</p></li>
+<li><p>We may need a way to “shutdown” providers, cancelling all handlers - this is addressed by: https://github.com/open-feature/ofep/pull/30</p></li>
+</ul>
+</section>
+<section id="demo">
+<h1>Demo<a class="headerlink" href="#demo" title="Permalink to this heading">¶</a></h1>
+<p><a class="reference external" href="https://github.com/open-feature/js-sdk/pull/316">Proposed JS-SDK implementation</a>
+<a class="reference external" href="https://github.com/open-feature/js-sdk-contrib/pull/142">Proposed usage in flagd-web provider</a></p>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">OFEP-TESTING</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, Mihir Mittal.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 6.2.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/007-OFEP-flag-change-events.md.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

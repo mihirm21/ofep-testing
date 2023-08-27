@@ -1,0 +1,115 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>003-OFEP-CUE-upstream &#8212; OFEP-TESTING 1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="ofep-cue-upstream">
+<h1>003-OFEP-CUE-upstream<a class="headerlink" href="#ofep-cue-upstream" title="Permalink to this heading">¶</a></h1>
+</section>
+<section id="state-drafting">
+<h1>State: DRAFTING<a class="headerlink" href="#state-drafting" title="Permalink to this heading">¶</a></h1>
+<p>As flagD evolves, it will be presented on different types of services with a variety of protocols.
+Many of these protocols have client libraries that can be generated for convenience.
+For example, we use openapi to enable us to create a golang server implementation.
+This is great because a) it’s fast and easy b) it matches the specification files promises exactly - validation/matching for free.</p>
+<p>Given we are looking to now expand to offer new generated server support for gRPC, we are in a predicament about whether to a) derive the implementation from OpenAPI b) have a new source of truth as .proto files c) have some sort of composite between the two.</p>
+<p>My proposal here would be to choose a new top-level DSL to define the specifications required to drive generated server code implementations. As such, cue offers integration with YAML/JSON &amp; protobuf directly.
+This would mean we could use a single file(s) and toolchain to generate all of the automatically created code for flagD.
+The benefit here would be a single source of truth, ease of contribution, ease of extension and simplified build process.</p>
+<img src="images/003-01.png" width="300">
+<p>By switching to CUE, we can use a single build chain to produce the OpenAPI spec as a generated file that is convenient to users who want to build against flagD ( possible code-generating their own client libraries). Though we would not need to use the generated OpenAPI spec through any further generator. Instead, the protoc-http tool will allow for generation from protobuf files as per &#64;James-Milligan initial investigation.</p>
+<p>Next steps:
+If we have agreement on this, I would propose looking at a top level CUE file(s) to replace the current OpenAPI YAML file that is generated from. At this point we will be able to prove it can become the new top-of-chain build step, enabling us to then replace the downstream components.</p>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">OFEP-TESTING</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, Mihir Mittal.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 6.2.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/003-OFEP-CUE-upstream.md.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

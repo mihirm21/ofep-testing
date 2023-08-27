@@ -1,0 +1,141 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>flagd client support driven by OpenFeature Operator &#8212; OFEP-TESTING 1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="flagd-client-support-driven-by-openfeature-operator">
+<h1>flagd client support driven by OpenFeature Operator<a class="headerlink" href="#flagd-client-support-driven-by-openfeature-operator" title="Permalink to this heading">¶</a></h1>
+</section>
+<section id="state-withdrawn">
+<h1>State: WITHDRAWN<a class="headerlink" href="#state-withdrawn" title="Permalink to this heading">¶</a></h1>
+<p>Client side applications (e.g. web/mobile) could benefit from access to feature flags. This OFEP outlines the feasibility and benefits of extending <a class="reference external" href="https://github.com/open-feature/open-feature-operator">OpenFeature Operator (OFO)</a> to manage the deployment of flagd with access from external traffic (e.g. client side applications).</p>
+<p><em>Withdrawn for the following reasons:</em></p>
+<ul class="simple">
+<li><p><em>There’s a huge variety of unknown deployment patterns by potential users. Catering to one likely means scope creep to support many in future. Perhaps this is the future path of OFO but an agreement has been reached that it is best to keep things simple and minimally scoped at this stage (until common deployment patterns are more established).</em></p></li>
+<li><p><em>OFO would require CRUD permissions for HTTPRoutes &amp; Gateways, introducing security concerns.</em></p></li>
+<li><p><em>Kubernetes Gateway API is still in beta.</em></p></li>
+</ul>
+<p><em><a class="reference internal" href="#./OFEP-ofo-flag-service.md"><span class="xref myst">OFEP for an alternative solution</span></a>.</em></p>
+</section>
+<section id="background">
+<h1>Background<a class="headerlink" href="#background" title="Permalink to this heading">¶</a></h1>
+<p>OFO already manages the deployment of flagd in server side contexts by injecting it as a sidecar container to an existing workload. This permits the workload to communicate with flagd due to the inherent nature of networking between containers within a pod. Conversely, the routing of client side applications to flagd is not trivial. OFO could bear this burden by configuring the cluster as necessary (see the proposal below) to facilitate the deployment of externally accessible (by client side applications) flagd.</p>
+</section>
+<section id="assumptions">
+<h1>Assumptions<a class="headerlink" href="#assumptions" title="Permalink to this heading">¶</a></h1>
+<p>The (simplified) deployment pattern is as follows</p>
+<ul class="simple">
+<li><p>Deployment of a client side application exposed by a Service</p></li>
+<li><p><a class="reference external" href="https://gateway-api.sigs.k8s.io/api-types/gateway/">Gateway</a> exposing the app’s Service via a <a class="reference external" href="https://gateway-api.sigs.k8s.io/api-types/httproute/">HTTPRoute</a> and listener</p></li>
+</ul>
+<p>The networking infrastructure for ingesting external traffic is already in place for the existing client side application.</p>
+</section>
+<section id="proposal">
+<h1>Proposal<a class="headerlink" href="#proposal" title="Permalink to this heading">¶</a></h1>
+<p>Introduce a custom resource definition (CRD) with configuration permitting OFO to create a deployment of flagd and inject the necessary networking configuration to route incoming traffic from the existing Gateway to flagd (via a new HTTPRoute/GRPCRoute).
+This results in flagd being externally accessible.</p>
+<p>The following diagram depicts the architecture. Resources inside the green box are created via the proposed CRD.</p>
+<p><img alt="OFO client architecture" src="_images/ofo-flagd-client-support-architecture.png" /></p>
+<p>Note: The example depicted by the diagram uses a subdomain to route the request to flagd but <a class="reference external" href="https://gateway-api.sigs.k8s.io/api-types/httproute/#matches">path matching is also possible</a>.</p>
+</section>
+<section id="limitations">
+<h1>Limitations<a class="headerlink" href="#limitations" title="Permalink to this heading">¶</a></h1>
+<p><a class="reference external" href="https://gateway-api.sigs.k8s.io/">Kubernetes Gateway API (KGA)</a> is in beta (as are its implementors). This OFEP could be extended (or a new one created) to also support <a class="reference external" href="https://kubernetes.io/docs/concepts/services-networking/ingress/">Ingress</a>.
+The <a class="reference external" href="https://gateway-api.sigs.k8s.io/api-types/grpcroute/">GRPCRoute</a> is experimental.</p>
+</section>
+<section id="proof-of-concept">
+<h1>Proof of concept<a class="headerlink" href="#proof-of-concept" title="Permalink to this heading">¶</a></h1>
+<p>A proof of concept has been created <a class="reference external" href="https://github.com/open-feature/open-feature-operator/issues/371#issuecomment-1468511819">here</a> with an executable demonstration of the proposal.</p>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">OFEP-TESTING</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, Mihir Mittal.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 6.2.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/014-OFEP-ofo-flagd-client-support.md.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

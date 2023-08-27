@@ -6,8 +6,15 @@ import os
 import sys
 
 # -- Path setup --------------------------------------------------------------
-project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
-sys.path.insert(0, project_root)
+# project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
+# sys.path.insert(0, project_root)
+
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
+parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
+
+# Now import the module
+import ofep_sphinx_extension
+
 
 # -- Project information -----------------------------------------------------
 project = 'OFEP-TESTING'
@@ -28,9 +35,9 @@ extensions = [
     'ofep_sphinx_extension.ofep_extension',
 ]
 # -- Custom script execution -------------------------------------------------
-index_gen_path = os.path.join(project_root,'docs', 'index_gen.py')  # Update this path
-generate_ofep_docs_path = os.path.join(project_root,'docs', 'generate_ofep_docs_rst.py')  # Update this path
-copy_files_path = os.path.join(project_root,'docs', 'copy_files.py')  # Update this path
+index_gen_path = os.path.join(parent_dir,'docs', 'index_gen.py')  # Update this path
+generate_ofep_docs_path = os.path.join(parent_dir,'docs', 'generate_ofep_docs_rst.py')  # Update this path
+copy_files_path = os.path.join(parent_dir,'docs', 'copy_files.py')  # Update this path
 
 if not os.path.exists('_build'):
     os.makedirs('_build')
