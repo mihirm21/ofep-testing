@@ -1,0 +1,155 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>005-OFEP-provider-hook.md &#8212; OFEP-TESTING 1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="ofep-provider-hook-md">
+<h1>005-OFEP-provider-hook.md<a class="headerlink" href="#ofep-provider-hook-md" title="Permalink to this heading">¶</a></h1>
+</section>
+<section id="state-approved">
+<h1>State: APPROVED<a class="headerlink" href="#state-approved" title="Permalink to this heading">¶</a></h1>
+<p>As a part of the Provider implementation by the Flag Management Systen, there is a need to have standardized support for hooks specific to the Provider. The
+Provider Hook(s) should be specific to the provider implementation and implement the various defined stages of the Hook interface as applicable to the
+specific provider.</p>
+</section>
+<section id="assumptions">
+<h1>Assumptions<a class="headerlink" href="#assumptions" title="Permalink to this heading">¶</a></h1>
+<p>The Provider Hook is transparent to the application developer. The Provider may choose to document certain default behavior/feature in specific stages of the
+Provider Hook as relevant to the application and the application developer may be allowed to override the default feature.</p>
+</section>
+<section id="example-use-case">
+<h1>Example Use Case<a class="headerlink" href="#example-use-case" title="Permalink to this heading">¶</a></h1>
+<p>Flag Management System X provides the option to add Experimentation as an extension of Feature Flag. The user creates a Feature Flag, runs basic on/off
+evaluations of the Feature targeting specific audience and then wants to run A/B tests and hence adds the Experimentation aspects to the Feature Flag.</p>
+<p>The Provider needs to generate event specific to the Experimentation implementation  on successful flag evaluation. The system wants to use a Provider Hook
+to do the following for each evaluation</p>
+<ol class="arabic simple">
+<li><p>Run initialization operations (Use the <em>before</em> stage of the Hook)</p></li>
+<li><p>Run an event publish operation on successful flag evaluation operation (Use the <em>after</em> stage of the Hook)</p></li>
+<li><p>Provide the option to the application developer to override the event publish operation</p>
+<ol class="arabic simple">
+<li><p>The application developer may choose not to immediately publish the event on evaluation, but decide to publish it (or not) later based on other
+application specific logic</p></li>
+</ol>
+</li>
+</ol>
+<p>For applications not required to override the default behavior, there is no extra step needed to add any other hooks. The Provider Hook is transparent to
+the application developer.</p>
+</section>
+<section id="example-workflow">
+<h1>Example Workflow<a class="headerlink" href="#example-workflow" title="Permalink to this heading">¶</a></h1>
+<ol class="arabic simple">
+<li><p>At the time of registering the provider (OpenFeature.setProvider), Provider implementation can register one or more Provider Hook(s)</p></li>
+<li><p>Provider Hook implements the <em>before</em> and <em>after</em> and any other relevant stages to run the relevant provider logic.</p></li>
+<li><p>Provider documents the relevant default behavior (e.g. automatic publish of Experimentation event on successful evaluation)</p></li>
+<li><p>Provider provides an implementation of an Invocation Hook to override this default behavior as a part of the Provider SDK.</p></li>
+<li><p>If needed, the application developer uses the invocation hook to override specific default behavior of the provider by using Hook Hints e.g. turn off
+default event publish behavior</p></li>
+</ol>
+</section>
+<section id="hook-ordering">
+<h1>Hook Ordering<a class="headerlink" href="#hook-ordering" title="Permalink to this heading">¶</a></h1>
+<p>The Hooks should be executed in specific order.</p>
+<ul class="simple">
+<li><p>before: API, Client, Invocation, Provider</p>
+<ul>
+<li><p>Provider does initialization after Invocation</p></li>
+</ul>
+</li>
+<li><p>after: Provider, Invocation, Client, API</p></li>
+<li><p>error (if applicable): Provider, Invocation, Client, API</p></li>
+<li><p>finally: Provider, Invocation, Client, API</p></li>
+</ul>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">OFEP-TESTING</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, Mihir Mittal.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 6.2.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/005-OFEP-provider-hook.md.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

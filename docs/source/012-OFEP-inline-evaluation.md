@@ -1,3 +1,12 @@
+---
+OFEP: 12
+title: 'Specification 0.6.0'
+status: Rejected
+date: 2023-05-24
+authors: [Michael Beemer, David Hirsch]
+tags: [spec, specification, sdk]
+
+---
 ## Inline Evaluation of Flag Rules
 
 ## State: REJECTED

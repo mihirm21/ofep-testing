@@ -1,0 +1,137 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>OFEP: Add gRPC sync support to flagd &#8212; OFEP-TESTING 1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="ofep-add-grpc-sync-support-to-flagd">
+<h1>OFEP: Add gRPC sync support to flagd<a class="headerlink" href="#ofep-add-grpc-sync-support-to-flagd" title="Permalink to this heading">¶</a></h1>
+</section>
+<section id="state-approved">
+<h1>State: APPROVED<a class="headerlink" href="#state-approved" title="Permalink to this heading">¶</a></h1>
+<p>This OFEP proposes to introduce gRPC syncs to flagd. gRPC sync will act similar to existing remote HTTP URL syncs. But
+going beyond periodic pulls, flagd can utilize gRPC server streaming to receive near real-time updates, pushed from a
+flag management system.</p>
+</section>
+<section id="background">
+<h1>Background<a class="headerlink" href="#background" title="Permalink to this heading">¶</a></h1>
+<p>gRPC server streaming allows clients to listen and react to server-pushed data. For flagd, this perfectly matches the
+ISync interface and current sync mechanism implementations.</p>
+<p>The gRPC schema will be defined by flagd and supporting flag management system(s) will then implement the contract.</p>
+<img src="images/ofep-fd-grpc-1.png" width="300">
+<p>Further, grpc server push can be expanded to have <code class="docutils literal notranslate"><span class="pre">event</span> <span class="pre">types</span></code> such as flag additions, updates and deletions, giving more
+performant connectivity between flagd and flag management system. Performance improvements come from reduced payload
+size(single flag change vs all flags) and not having connection establishment overhead thanks to streaming.</p>
+<p>Note that the implementation complexity of <code class="docutils literal notranslate"><span class="pre">event</span> <span class="pre">types</span></code> lives at grpc server implementation. The implementation may use
+a state management system to derive the matching event type for a specific flag configuration change. In any case,
+flagd must not maintain any state (i.e- flagd must be stateless) and only react on the sync type to update flag
+configurations.</p>
+<img src="images/ofep-fd-grpc-2.png" width="300">
+<section id="tasks">
+<h2>Tasks<a class="headerlink" href="#tasks" title="Permalink to this heading">¶</a></h2>
+<p>Following are the main tasks I am proposing for the implementation.</p>
+<ul class="simple">
+<li><p>[x] POC implementation - https://github.com/open-feature/flagd/pull/297</p></li>
+<li><p>[ ] OFEP approval</p></li>
+<li><p>[ ] Introduce basic grpc sync, with minimal configuration options</p></li>
+<li><p>[ ] Introduce additional options, such as TLS certificates, token authentication on top of existing solution</p></li>
+</ul>
+<section id="ssl-certificates-and-token-authentication">
+<h3>SSL certificates and token authentication<a class="headerlink" href="#ssl-certificates-and-token-authentication" title="Permalink to this heading">¶</a></h3>
+<p>Consider the GRPC authentication example provided through official Go guide - <a class="reference external" href="https://github.com/grpc/grpc-go/tree/master/examples/features/authentication">Link</a></p>
+<p>With a similar approach, it is possible to establish TLS connections and enable token based authentication/authorization
+between flagd and flag management system.</p>
+</section>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">OFEP-TESTING</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, Mihir Mittal.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 6.2.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/010-OFEP-flagd-grpc-sync.md.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
