@@ -42,7 +42,7 @@ copy_files_path = os.path.join(parent_dir,'docs', 'copy_files.py')  # Update thi
 if not os.path.exists('_build'):
     os.makedirs('_build')
 
-python_executable = '/bin/python3'  # Replace with the full path to the Python interpreter
+python_executable = 'python'  # Replace with the full path to the Python interpreter
 os.system(f'{python_executable} {index_gen_path}')
 os.system(f'{python_executable} {generate_ofep_docs_path}')
 os.system(f'{python_executable} {copy_files_path}')
