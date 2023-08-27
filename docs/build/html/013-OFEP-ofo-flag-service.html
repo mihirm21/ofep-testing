@@ -18,7 +18,9 @@
         <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="OFEP-007: Surfacing flag metadata" href="008-OFEP-provider-flag-metadata.html" />
+    <link rel="prev" title="002-OFEP-kubecon-demo" href="002-OFEP-kubecon-demo.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -40,17 +42,37 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">flag service deployment driven by OpenFeature Operator</a></li>
-<li><a class="reference internal" href="#state-approved">State: APPROVED</a></li>
-<li><a class="reference internal" href="#background">Background</a></li>
-<li><a class="reference internal" href="#proposal">Proposal</a><ul>
-<li><a class="reference internal" href="#rbac">RBAC</a></li>
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="016-OFEP-provider-metadata-capability-discovery.html">OFEP-provider-metadata-capability-discovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="015-OFEP-provider-client-mapping.html">Provider to client mapping</a></li>
+<li class="toctree-l1"><a class="reference internal" href="017-OFEP-single-context-paradigm.html">OFEP-single-context-paradigm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="014-OFEP-ofo-flagd-client-support.html">flagd client support driven by OpenFeature Operator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="001-OFEP-cloud-native-pattern.html">001-OFEP-cloud-native-pattern.md</a></li>
+<li class="toctree-l1"><a class="reference internal" href="007-OFEP-flag-change-events.html">007-OFEP-flag-change-events</a></li>
+<li class="toctree-l1"><a class="reference internal" href="004-OFEP-kubernetes-sync-service.html">004-OFEP-inotfiy-interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="003-OFEP-CUE-upstream.html">003-OFEP-CUE-upstream</a></li>
+<li class="toctree-l1"><a class="reference internal" href="009-OFEP-add-dispose.html">Add dispose functionality to API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html">Open Feature Enhancement Proposals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="012-OFEP-inline-evaluation.html">Inline Evaluation of Flag Rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="006-OFEP-flagd-sockets.html">NAME</a></li>
+<li class="toctree-l1"><a class="reference internal" href="011-OFEP-transaction-context-propagation.html">Transaction Context Propagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="005-OFEP-provider-hook.html">005-OFEP-provider-hook.md</a></li>
+<li class="toctree-l1"><a class="reference internal" href="000-OFEP-template.html">NAME</a></li>
+<li class="toctree-l1"><a class="reference internal" href="002-OFEP-kubecon-demo.html">002-OFEP-kubecon-demo</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">flag service deployment driven by OpenFeature Operator</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#state-approved">State: APPROVED</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#background">Background</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#proposal">Proposal</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rbac">RBAC</a></li>
 </ul>
 </li>
 </ul>
-</div>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="008-OFEP-provider-flag-metadata.html">OFEP-007: Surfacing flag metadata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OFEP_Index.html">OFEP Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="010-OFEP-flagd-grpc-sync.html">OFEP: Add gRPC sync support to flagd</a></li>
+</ul>
+
         </div>
       </div>
     </nav>
@@ -65,6 +87,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="ofep_docs.html">&lt;no title&gt;</a></li>
       <li class="breadcrumb-item active">flag service deployment driven by OpenFeature Operator</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/013-OFEP-ofo-flag-service.md.txt" rel="nofollow"> View page source</a>
@@ -77,21 +100,20 @@
              
   <section id="flag-service-deployment-driven-by-openfeature-operator">
 <h1>flag service deployment driven by OpenFeature Operator<a class="headerlink" href="#flag-service-deployment-driven-by-openfeature-operator" title="Permalink to this heading"></a></h1>
-</section>
 <section id="state-approved">
-<h1>State: APPROVED<a class="headerlink" href="#state-approved" title="Permalink to this heading"></a></h1>
+<h2>State: APPROVED<a class="headerlink" href="#state-approved" title="Permalink to this heading"></a></h2>
 <p>Currently, OpenFeature Operator (OFO) manages the deployment of a flag provider (e.g. flagd) by appending it to a pod’s containers (sidecar pattern), thereby allowing containers within the pod to route to it. This OFEP campaigns for the extension of OFO to manage flag providers by abstracting a Kubernetes Deployment resource.</p>
 </section>
 <section id="background">
-<h1>Background<a class="headerlink" href="#background" title="Permalink to this heading"></a></h1>
+<h2>Background<a class="headerlink" href="#background" title="Permalink to this heading"></a></h2>
 <p>The driving force behind this is to simplify the deployment of flag providers for use by client side applications. An <a class="reference internal" href="#./OFEP-ofo-flagd-client-support.md"><span class="xref myst">OFEP was drafted</span></a> to achieve this but subsequently withdrawn (reasons noted within). This OFEP recognises the limitations of the previous, presenting a modular solution with a broader scope.</p>
 </section>
 <section id="proposal">
-<h1>Proposal<a class="headerlink" href="#proposal" title="Permalink to this heading"></a></h1>
+<h2>Proposal<a class="headerlink" href="#proposal" title="Permalink to this heading"></a></h2>
 <p>Introduce a FlagService custom resource definition (CRD) and controller.
 The controller uses the configuration defined within the custom resource (CR) to create a Service (in OFO’s namespace) and a Deployment of a flag provider (backed by the Service) in the same namespace as the CR. This is a common deployment pattern permitting access by any component that routes to the created Service (e.g. Ingress/Load Balancer). OFO already manages the <a class="reference external" href="https://learn.microsoft.com/en-us/azure/architecture/patterns/sidecar">sidecar deployment pattern</a> to achieve the goal of an internally routable flag provider. In contrast, the described FlagService pattern permits an externally routable flag provider.</p>
 <section id="rbac">
-<h2>RBAC<a class="headerlink" href="#rbac" title="Permalink to this heading"></a></h2>
+<h3>RBAC<a class="headerlink" href="#rbac" title="Permalink to this heading"></a></h3>
 <p>OFO already has RBAC to Deployments but not Services so (at minimum) the following is required.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">apiVersion</span><span class="p">:</span> <span class="n">rbac</span><span class="o">.</span><span class="n">authorization</span><span class="o">.</span><span class="n">k8s</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">v1</span>
 <span class="n">kind</span><span class="p">:</span> <span class="n">Role</span>
@@ -117,11 +139,15 @@ The controller uses the configuration defined within the custom resource (CR) to
 <p>This restricts OFO’s Service mutation scope to within its namespace.</p>
 </section>
 </section>
+</section>
 
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="002-OFEP-kubecon-demo.html" class="btn btn-neutral float-left" title="002-OFEP-kubecon-demo" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="008-OFEP-provider-flag-metadata.html" class="btn btn-neutral float-right" title="OFEP-007: Surfacing flag metadata" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 

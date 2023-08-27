@@ -7,7 +7,7 @@ authors: [Michael Beemer, David Hirsch]
 tags: [spec, specification, sdk]
 
 ---
-## 003-OFEP-CUE-upstream
+# 003-OFEP-CUE-upstream
 
 ## State: DRAFTING
 

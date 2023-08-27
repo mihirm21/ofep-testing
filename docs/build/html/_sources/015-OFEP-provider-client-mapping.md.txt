@@ -7,7 +7,7 @@ authors: [Michael Beemer, David Hirsch]
 tags: [spec, specification, sdk]
 
 ---
-## Provider to client mapping
+# Provider to client mapping
 
 ## State: APPROVED
 

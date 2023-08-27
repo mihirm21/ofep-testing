@@ -7,7 +7,7 @@ authors: [Michael Beemer, David Hirsch]
 tags: [spec, specification, sdk]
 
 ---
-## flag service deployment driven by OpenFeature Operator
+# flag service deployment driven by OpenFeature Operator
 
 ## State: APPROVED
 

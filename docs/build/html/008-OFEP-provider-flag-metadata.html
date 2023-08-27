@@ -18,7 +18,9 @@
         <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="OFEP Index" href="OFEP_Index.html" />
+    <link rel="prev" title="flag service deployment driven by OpenFeature Operator" href="013-OFEP-ofo-flag-service.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -40,18 +42,38 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">OFEP-007: Surfacing flag metadata</a></li>
-<li><a class="reference internal" href="#state-approved">State: APPROVED</a></li>
-<li><a class="reference internal" href="#background">Background</a></li>
-<li><a class="reference internal" href="#non-goals">Non-goals</a></li>
-<li><a class="reference internal" href="#proposal">Proposal</a><ul>
-<li><a class="reference internal" href="#other-details">other details</a></li>
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="016-OFEP-provider-metadata-capability-discovery.html">OFEP-provider-metadata-capability-discovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="015-OFEP-provider-client-mapping.html">Provider to client mapping</a></li>
+<li class="toctree-l1"><a class="reference internal" href="017-OFEP-single-context-paradigm.html">OFEP-single-context-paradigm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="014-OFEP-ofo-flagd-client-support.html">flagd client support driven by OpenFeature Operator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="001-OFEP-cloud-native-pattern.html">001-OFEP-cloud-native-pattern.md</a></li>
+<li class="toctree-l1"><a class="reference internal" href="007-OFEP-flag-change-events.html">007-OFEP-flag-change-events</a></li>
+<li class="toctree-l1"><a class="reference internal" href="004-OFEP-kubernetes-sync-service.html">004-OFEP-inotfiy-interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="003-OFEP-CUE-upstream.html">003-OFEP-CUE-upstream</a></li>
+<li class="toctree-l1"><a class="reference internal" href="009-OFEP-add-dispose.html">Add dispose functionality to API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html">Open Feature Enhancement Proposals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="012-OFEP-inline-evaluation.html">Inline Evaluation of Flag Rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="006-OFEP-flagd-sockets.html">NAME</a></li>
+<li class="toctree-l1"><a class="reference internal" href="011-OFEP-transaction-context-propagation.html">Transaction Context Propagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="005-OFEP-provider-hook.html">005-OFEP-provider-hook.md</a></li>
+<li class="toctree-l1"><a class="reference internal" href="000-OFEP-template.html">NAME</a></li>
+<li class="toctree-l1"><a class="reference internal" href="002-OFEP-kubecon-demo.html">002-OFEP-kubecon-demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="013-OFEP-ofo-flag-service.html">flag service deployment driven by OpenFeature Operator</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">OFEP-007: Surfacing flag metadata</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#state-approved">State: APPROVED</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#background">Background</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#non-goals">Non-goals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#proposal">Proposal</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#other-details">other details</a></li>
 </ul>
 </li>
 </ul>
-</div>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="OFEP_Index.html">OFEP Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="010-OFEP-flagd-grpc-sync.html">OFEP: Add gRPC sync support to flagd</a></li>
+</ul>
+
         </div>
       </div>
     </nav>
@@ -66,6 +88,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="ofep_docs.html">&lt;no title&gt;</a></li>
       <li class="breadcrumb-item active">OFEP-007: Surfacing flag metadata</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/008-OFEP-provider-flag-metadata.md.txt" rel="nofollow"> View page source</a>
@@ -78,22 +101,21 @@
              
   <section id="ofep-007-surfacing-flag-metadata">
 <h1>OFEP-007: Surfacing flag metadata<a class="headerlink" href="#ofep-007-surfacing-flag-metadata" title="Permalink to this heading"></a></h1>
-</section>
 <section id="state-approved">
-<h1>State: APPROVED<a class="headerlink" href="#state-approved" title="Permalink to this heading"></a></h1>
+<h2>State: APPROVED<a class="headerlink" href="#state-approved" title="Permalink to this heading"></a></h2>
 <p>This proposal lays out a mechanism for flag providers to surface arbitrary flag metadata to Open Feature, and for hooks to access this metadata.</p>
 </section>
 <section id="background">
-<h1>Background<a class="headerlink" href="#background" title="Permalink to this heading"></a></h1>
+<h2>Background<a class="headerlink" href="#background" title="Permalink to this heading"></a></h2>
 <p>Flag providers maintain metadata about a feature flag, and there are scenarios where a hook might benefit from being able to access this metadata. For example, a flag provider could surface a <code class="docutils literal notranslate"><span class="pre">management-url</span></code> attribute which an open-telemetry hook could then add to an otel span, allowing someone viewing a trace for a feature-flagged operation to easily navigate to a webpage describing that flag in detail.</p>
 <p>Different providers will expose different kinds of metadata, and different Application Integrators will want to consume that metadata in different ways. As such, the goal of this proposal is to provide a simple way for the Open Feature runtime to pass generic metadata from a provider to a hook, without Open Feature itself understanding the semantics of that metadata.</p>
 </section>
 <section id="non-goals">
-<h1>Non-goals<a class="headerlink" href="#non-goals" title="Permalink to this heading"></a></h1>
+<h2>Non-goals<a class="headerlink" href="#non-goals" title="Permalink to this heading"></a></h2>
 <p>In the future we may wish to standardize the semantics of some key metadata attributes which are common amongst many providers (e.g. <code class="docutils literal notranslate"><span class="pre">expiration-date</span></code>, <code class="docutils literal notranslate"><span class="pre">owner</span></code>, <code class="docutils literal notranslate"><span class="pre">management-url</span></code>) so that provider-agnostic hooks can be created to consume these standard attributes, but that is explicitly NOT in the scope of this OFEP - we would prefer to see which common attributes naturally emerge and then “pave those cow paths”.</p>
 </section>
 <section id="proposal">
-<h1>Proposal<a class="headerlink" href="#proposal" title="Permalink to this heading"></a></h1>
+<h2>Proposal<a class="headerlink" href="#proposal" title="Permalink to this heading"></a></h2>
 <p>The Open Feature spec will be extended in two ways:</p>
 <ul class="simple">
 <li><p>a flag provider will be able to provide a bag of metadata attributes for a feature flag. This bag will be a set of key-value pairs, where the key will be a string and the value will be a small set of primitive values.</p></li>
@@ -105,16 +127,20 @@
 <p>The flagMetadata field MAY return an empty record. A missing <code class="docutils literal notranslate"><span class="pre">flagMetadata</span></code> field MUST be interpreted as an empty record.</p>
 <p>Since hooks are provided the evaluation context, they would have access to any flag metadata that the provider provides.</p>
 <section id="other-details">
-<h2>other details<a class="headerlink" href="#other-details" title="Permalink to this heading"></a></h2>
+<h3>other details<a class="headerlink" href="#other-details" title="Permalink to this heading"></a></h3>
 <p>The flagMetadata field should be considered immutable. We won’t support adding/removing/editing metadata in hooks, for example.</p>
 <p>Format of the metadata attribute is left up to the provider. Maybe we provide suggestions around formatting, and a namespacing prefix (e.g. <code class="docutils literal notranslate"><span class="pre">&quot;flags-r-us.management-url&quot;</span></code>). Following otel conventions for span attributes might be smart.</p>
+</section>
 </section>
 </section>
 
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="013-OFEP-ofo-flag-service.html" class="btn btn-neutral float-left" title="flag service deployment driven by OpenFeature Operator" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="OFEP_Index.html" class="btn btn-neutral float-right" title="OFEP Index" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 

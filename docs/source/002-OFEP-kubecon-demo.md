@@ -7,7 +7,7 @@ authors: [Michael Beemer, David Hirsch]
 tags: [spec, specification, sdk]
 
 ---
-## 002-OFEP-kubecon-demo
+# 002-OFEP-kubecon-demo
 
 ## State: APPROVED
 

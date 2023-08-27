@@ -7,7 +7,7 @@ authors: [Michael Beemer, David Hirsch]
 tags: [spec, specification, sdk]
 
 ---
-## Transaction Context Propagation
+# Transaction Context Propagation
 
 ## State: APPROVED
 

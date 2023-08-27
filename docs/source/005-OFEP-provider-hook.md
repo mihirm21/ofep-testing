@@ -7,7 +7,7 @@ authors: [Michael Beemer, David Hirsch]
 tags: [spec, specification, sdk]
 
 ---
-## 005-OFEP-provider-hook.md
+# 005-OFEP-provider-hook.md
 
 ## State: APPROVED
 

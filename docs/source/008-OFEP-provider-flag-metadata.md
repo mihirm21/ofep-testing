@@ -7,7 +7,7 @@ authors: [Michael Beemer, David Hirsch]
 tags: [spec, specification, sdk]
 
 ---
-## OFEP-007: Surfacing flag metadata
+# OFEP-007: Surfacing flag metadata
 
 ## State: APPROVED
 This proposal lays out a mechanism for flag providers to surface arbitrary flag metadata to Open Feature, and for hooks to access this metadata.

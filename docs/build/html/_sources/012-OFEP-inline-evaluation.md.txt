@@ -7,7 +7,7 @@ authors: [Michael Beemer, David Hirsch]
 tags: [spec, specification, sdk]
 
 ---
-## Inline Evaluation of Flag Rules
+# Inline Evaluation of Flag Rules
 
 ## State: REJECTED
 

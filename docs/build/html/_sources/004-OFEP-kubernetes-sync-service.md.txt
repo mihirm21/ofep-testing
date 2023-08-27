@@ -7,7 +7,7 @@ authors: [Michael Beemer, David Hirsch]
 tags: [spec, specification, sdk]
 
 ---
-## 004-OFEP-inotfiy-interface
+# 004-OFEP-inotfiy-interface
 
 ## State: APPROVED
 

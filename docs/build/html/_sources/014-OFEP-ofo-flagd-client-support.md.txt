@@ -7,7 +7,7 @@ authors: [Michael Beemer, David Hirsch]
 tags: [spec, specification, sdk]
 
 ---
-## flagd client support driven by OpenFeature Operator
+# flagd client support driven by OpenFeature Operator
 
 ## State: WITHDRAWN
 

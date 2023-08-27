@@ -7,7 +7,7 @@ authors: [Michael Beemer, David Hirsch]
 tags: [spec, specification, sdk]
 
 ---
-## 007-OFEP-flag-change-events
+# 007-OFEP-flag-change-events
 
 ## State: APPROVED
 

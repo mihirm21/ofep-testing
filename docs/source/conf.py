@@ -44,8 +44,8 @@ if not os.path.exists('_build'):
 
 python_executable = '/bin/python3'  # Replace with the full path to the Python interpreter
 os.system(f'{python_executable} {index_gen_path}')
-os.system(f'{python_executable} {generate_ofep_docs_path}')
 os.system(f'{python_executable} {copy_files_path}')
+os.system(f'{python_executable} {generate_ofep_docs_path}')
 
 # -- Other settings ----------------------------------------------------------
 # ...
@@ -78,5 +78,5 @@ exclude_patterns = []
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-html_theme = "sphinx_rtd_theme"
+html_theme = 'sphinx_rtd_theme'
 html_static_path = ['_static']

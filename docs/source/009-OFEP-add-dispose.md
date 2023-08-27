@@ -7,7 +7,7 @@ authors: [Michael Beemer, David Hirsch]
 tags: [spec, specification, sdk]
 
 ---
-## Add dispose functionality to API
+# Add dispose functionality to API
 
 ## State: APPROVED
 

@@ -7,7 +7,7 @@ authors: [Michael Beemer, David Hirsch]
 tags: [spec, specification, sdk]
 
 ---
-## OFEP-provider-metadata-capability-discovery
+# OFEP-provider-metadata-capability-discovery
 
 ## State: APPROVED
 

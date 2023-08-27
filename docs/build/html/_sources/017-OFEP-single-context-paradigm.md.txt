@@ -7,7 +7,7 @@ authors: [Michael Beemer, David Hirsch]
 tags: [spec, specification, sdk]
 
 ---
-## OFEP-single-context-paradigm
+# OFEP-single-context-paradigm
 
 ## State: APPROVED
 

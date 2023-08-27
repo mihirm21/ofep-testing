@@ -12,6 +12,15 @@ destination_directory = os.path.join(root_directory, 'docs', 'source')
 if not os.path.exists(destination_directory):
     os.makedirs(destination_directory)
 
+for filename in os.listdir(destination_directory):
+    if filename=='OFEP_Index.md':
+        source_file_path = os.path.join(destination_directory, filename)
+        destination_file_path = os.path.join(source_directory, filename)
+        if os.path.exists(destination_file_path):
+            os.remove(destination_file_path)
+        shutil.copy2(source_file_path, destination_file_path)
+        print(f"Copied {source_file_path} to {destination_file_path}")
+
 # Iterate through the files in the root directory
 for filename in os.listdir(source_directory):
     if filename.endswith('.md'):
