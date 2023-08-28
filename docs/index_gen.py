@@ -16,10 +16,10 @@ def parse_frontmatter(md_content):
 # Initialize data structures to store categorized OFEPs
 status_to_ofeps = {
     'Active': [],
+    'Accepted': [],
     'Draft': [],
     'Rejected': [],
     'Withdrawn': [],
-    'Approved': []
 }
 
 # Get the directory of the script

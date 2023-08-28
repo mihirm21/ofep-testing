@@ -13,7 +13,7 @@ if not os.path.exists(destination_directory):
     os.makedirs(destination_directory)
 
 # Get the list of OFEP files in the source directory
-ofep_files = [file for file in os.listdir(source_directory) if file.endswith('.md')]
+ofep_files = [file for file in os.listdir(source_directory) if file.endswith('.md') and 'OFEP' in file]
 
 # Generate the content for ofep_docs.rst
 content = '.. toctree::\n   :titlesonly:\n   :maxdepth: 1\n   :caption: OFEP Documentation\n\n   '

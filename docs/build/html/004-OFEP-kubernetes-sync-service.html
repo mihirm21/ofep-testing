@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>004-OFEP-inotfiy-interface &mdash; OFEP-TESTING 1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="003-OFEP-CUE-upstream" href="003-OFEP-CUE-upstream.html" />
+    <link rel="prev" title="007-OFEP-flag-change-events" href="007-OFEP-flag-change-events.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            OFEP-TESTING
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="016-OFEP-provider-metadata-capability-discovery.html">OFEP-provider-metadata-capability-discovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="015-OFEP-provider-client-mapping.html">Provider to client mapping</a></li>
+<li class="toctree-l1"><a class="reference internal" href="017-OFEP-single-context-paradigm.html">OFEP-single-context-paradigm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="014-OFEP-ofo-flagd-client-support.html">flagd client support driven by OpenFeature Operator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="001-OFEP-cloud-native-pattern.html">001-OFEP-cloud-native-pattern.md</a></li>
+<li class="toctree-l1"><a class="reference internal" href="007-OFEP-flag-change-events.html">007-OFEP-flag-change-events</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">004-OFEP-inotfiy-interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="003-OFEP-CUE-upstream.html">003-OFEP-CUE-upstream</a></li>
+<li class="toctree-l1"><a class="reference internal" href="009-OFEP-add-dispose.html">Add dispose functionality to API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="012-OFEP-inline-evaluation.html">Inline Evaluation of Flag Rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="006-OFEP-flagd-sockets.html">NAME</a></li>
+<li class="toctree-l1"><a class="reference internal" href="011-OFEP-transaction-context-propagation.html">Transaction Context Propagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="005-OFEP-provider-hook.html">005-OFEP-provider-hook.md</a></li>
+<li class="toctree-l1"><a class="reference internal" href="000-OFEP-template.html">NAME</a></li>
+<li class="toctree-l1"><a class="reference internal" href="002-OFEP-kubecon-demo.html">002-OFEP-kubecon-demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="013-OFEP-ofo-flag-service.html">flag service deployment driven by OpenFeature Operator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="008-OFEP-provider-flag-metadata.html">OFEP-007: Surfacing flag metadata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OFEP_Index.html">OFEP Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="010-OFEP-flagd-grpc-sync.html">OFEP: Add gRPC sync support to flagd</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">OFEP-TESTING</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="ofep_docs.html">&lt;no title&gt;</a></li>
+      <li class="breadcrumb-item active">004-OFEP-inotfiy-interface</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/004-OFEP-kubernetes-sync-service.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="ofep-inotfiy-interface">
+<h1>004-OFEP-inotfiy-interface<a class="headerlink" href="#ofep-inotfiy-interface" title="Permalink to this heading"></a></h1>
+<section id="state-approved">
+<h2>State: APPROVED<a class="headerlink" href="#state-approved" title="Permalink to this heading"></a></h2>
+<p>FlagD is often used in the context of Kubernetes.</p>
+<p>It is typically deployed by OFO as a companion sidecar and uses a volume injected via configmap as the source of its flags to evaluate.</p>
+<p>I propose there may be a more optimal way to enable faster refreshing on flag changes by subscribing to a notifier against the Kubernetes API. This is inspired by this discussion with &#64;therealmitchconnors and also the regression in being able to trigger configmap volume reloads through updating annotations within a deployment.</p>
+<p>This is not a silverbullet and I think for academic purposes alone it is worth exploring if we would want to move in this direction.</p>
+<p>~~The only real benefit here is speed of flag updates.~~</p>
+<p><em>Benefits to be discussed within this document</em></p>
+</section>
+<section id="design">
+<h2>Design<a class="headerlink" href="#design" title="Permalink to this heading"></a></h2>
+<p>FlagD would start with the typical arguments of flagd start –sync-service kubernetes.
+This would use the token mounted from /var/run/secrets/kubernetes.io/serviceaccount to request to watch events for the FeatureFlagConfiguration. The FeatureFlagConfiguration could be determined by the pod getting its own annotations on start through the API and performing a look-up.</p>
+<p>The current sync mechanics should be compatible with the</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span> <span class="n">ISync</span> <span class="n">interface</span> <span class="p">{</span>
+	<span class="n">Fetch</span><span class="p">(</span><span class="n">ctx</span> <span class="n">context</span><span class="o">.</span><span class="n">Context</span><span class="p">)</span> <span class="p">(</span><span class="n">string</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span>
+	<span class="n">Notify</span><span class="p">(</span><span class="n">ctx</span> <span class="n">context</span><span class="o">.</span><span class="n">Context</span><span class="p">,</span> <span class="n">c</span> <span class="n">chan</span><span class="o">&lt;-</span> <span class="n">INotify</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<!-- <img src="images/004-01.png" width="650px;"> -->
+<p><img alt="unlabelled_image" src="_images/004-01.png" /></p>
+<section id="realtime-updates">
+<h3>Realtime updates<a class="headerlink" href="#realtime-updates" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>Shared informer factory will need to be extended to support the FeatureFlagConfiguration type through the restful API.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">queue</span> <span class="o">:=</span> <span class="n">workqueue</span><span class="o">.</span><span class="n">NewRateLimitingQueue</span><span class="p">(</span><span class="n">workqueue</span><span class="o">.</span><span class="n">DefaultControllerRateLimiter</span><span class="p">())</span>
+<span class="n">labelset</span> <span class="o">:=</span> <span class="n">labels</span><span class="o">.</span><span class="n">Set</span><span class="p">(</span><span class="n">labelmap</span><span class="p">)</span>
+<span class="n">optionsModifier</span> <span class="o">:=</span> <span class="n">func</span><span class="p">(</span><span class="n">options</span> <span class="o">*</span><span class="n">meta_v1</span><span class="o">.</span><span class="n">ListOptions</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">options</span><span class="o">.</span><span class="n">LabelSelector</span> <span class="o">=</span> <span class="n">labels</span><span class="o">.</span><span class="n">SelectorFromSet</span><span class="p">(</span><span class="n">labelset</span><span class="p">)</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="n">informer</span> <span class="o">:=</span> <span class="n">config</span><span class="o">.</span><span class="n">InformerFactory</span><span class="o">.</span><span class="n">InformerFor</span><span class="p">(</span><span class="o">&amp;</span><span class="n">batch_v1</span><span class="o">.</span><span class="n">Job</span><span class="p">{},</span> <span class="n">func</span><span class="p">(</span><span class="n">client</span> <span class="n">kubernetes</span><span class="o">.</span><span class="n">Interface</span><span class="p">,</span> <span class="n">resyncPeriod</span> <span class="n">time</span><span class="o">.</span><span class="n">Duration</span><span class="p">)</span> <span class="n">cache</span><span class="o">.</span><span class="n">SharedIndexInformer</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">cache</span><span class="o">.</span><span class="n">NewSharedIndexInformer</span><span class="p">(</span>
+        <span class="n">cache</span><span class="o">.</span><span class="n">NewFilteredListWatchFromClient</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">BatchV1</span><span class="p">()</span><span class="o">.</span><span class="n">RESTClient</span><span class="p">(),</span> <span class="s2">&quot;featureflagconfigurations&quot;</span><span class="p">,</span> <span class="n">namespace</span><span class="p">,</span> <span class="n">optionsModifier</span><span class="p">),</span>
+        <span class="o">&amp;</span><span class="n">batch_v1</span><span class="o">.</span><span class="n">Job</span><span class="p">{},</span>
+        <span class="n">resyncPeriod</span><span class="p">,</span>
+        <span class="n">cache</span><span class="o">.</span><span class="n">Indexers</span><span class="p">{</span><span class="n">cache</span><span class="o">.</span><span class="n">NamespaceIndex</span><span class="p">:</span> <span class="n">cache</span><span class="o">.</span><span class="n">MetaNamespaceIndexFunc</span><span class="p">},</span>
+    <span class="p">)</span>
+<span class="p">})</span>
+</pre></div>
+</div>
+<p>I believe a <em>sharedinformer</em> might be appropriate over indexed, unless we’re looping over all the featureflagconfigurations in the cluster and they list in their hundreds.</p>
+<!-- <img src="images/004-02.png" width="850px;"> -->
+<p><img alt="unlabelled_image" src="_images/004-02.png" /></p>
+</section>
+</section>
+<section id="benefits">
+<h2>Benefits<a class="headerlink" href="#benefits" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Near real-time updates to flags as described within a Custom resource</p></li>
+<li><p>Lays foundation for watching of specific flagD feature configuration types <em>as per previous issue discussions</em></p></li>
+</ul>
+</section>
+<section id="caveats">
+<h2>Caveats<a class="headerlink" href="#caveats" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Creates a deep reference to Open feature operator</p></li>
+<li><p>Requires the design of failures modes for deletion of custom resources.</p></li>
+<li><p>Additional load on the API Server</p></li>
+<li><p>tightly couple FlagD to the Kubernetes golang bindings and limit multi-arch compatibility</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="007-OFEP-flag-change-events.html" class="btn btn-neutral float-left" title="007-OFEP-flag-change-events" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="003-OFEP-CUE-upstream.html" class="btn btn-neutral float-right" title="003-OFEP-CUE-upstream" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Mihir Mittal.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
