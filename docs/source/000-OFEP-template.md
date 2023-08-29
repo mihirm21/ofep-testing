@@ -7,7 +7,9 @@ authors: [Alex Jones]
 tags: [template]
 ---
 
-# NAME
+# Template
+
+## NAME
 
 ## State: ( DRAFTING | WITHDRAWN | PENDING REVIEW | APPROVED | REJECTED )
 

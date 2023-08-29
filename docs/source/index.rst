@@ -8,8 +8,10 @@ Welcome to OFEP-TESTING's documentation!
 
 .. toctree::
    :titlesonly:
-   :maxdepth: 1
+   :maxdepth: 2
+   :hidden:
 
+   OFEP_Index
    ofep_docs
 
 
