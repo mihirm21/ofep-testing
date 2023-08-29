@@ -16,7 +16,7 @@ def parse_frontmatter(md_content):
 # Initialize data structures to store categorized OFEPs
 status_to_ofeps = {
     'Active': [],
-    'Accepted': [],
+    'Approved': [],
     'Draft': [],
     'Rejected': [],
     'Withdrawn': [],
