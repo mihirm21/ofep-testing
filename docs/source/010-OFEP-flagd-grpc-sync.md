@@ -7,15 +7,15 @@ authors: [Kavindu Dodanduwa]
 tags: [spec, specification, sdk]
 
 ---
-# OFEP: Add gRPC sync support to flagd
+# 010-OFEP-Add gRPC sync support to flagd
 
-### State: APPROVED
+## State: APPROVED
 
 This OFEP proposes to introduce gRPC syncs to flagd. gRPC sync will act similar to existing remote HTTP URL syncs. But
 going beyond periodic pulls, flagd can utilize gRPC server streaming to receive near real-time updates, pushed from a
 flag management system.
 
-### Background
+## Background
 
 gRPC server streaming allows clients to listen and react to server-pushed data. For flagd, this perfectly matches the
 ISync interface and current sync mechanism implementations.
@@ -37,7 +37,7 @@ configurations.
 <!-- <img src="images/ofep-fd-grpc-2.png" width="300"> -->
 ![unlabelled_image](images/ofep-fd-grpc-2.png "unlabelled_image")
 
-#### Tasks
+### Tasks
 
 Following are the main tasks I am proposing for the implementation.
 
@@ -46,7 +46,7 @@ Following are the main tasks I am proposing for the implementation.
 - [ ] Introduce basic grpc sync, with minimal configuration options
 - [ ] Introduce additional options, such as TLS certificates, token authentication on top of existing solution
 
-###### SSL certificates and token authentication
+#### SSL certificates and token authentication
 
 Consider the GRPC authentication example provided through official Go guide - [Link](https://github.com/grpc/grpc-go/tree/master/examples/features/authentication)
 

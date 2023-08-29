@@ -23,7 +23,7 @@ for filename in os.listdir(destination_directory):
 
 # Iterate through the files in the root directory
 for filename in os.listdir(source_directory):
-    if filename.endswith('.md') and 'OFEP' in filename:
+    if filename.endswith('.md') and filename.find('OFEP')!=-1:
         source_file_path = os.path.join(source_directory, filename)
         destination_file_path = os.path.join(destination_directory, filename)
         if os.path.exists(destination_file_path):

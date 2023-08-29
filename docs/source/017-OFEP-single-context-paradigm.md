@@ -7,13 +7,13 @@ authors: [Todd Baert]
 tags: [spec, specification, sdk]
 
 ---
-# OFEP-single-context-paradigm
+# 017-OFEP-single-context-paradigm
 
-### State: APPROVED
+## State: APPROVED
 
 This draft outlines a "single-context" paradigm - an alternative pattern and set of APIs supporting client use-cases.
 
-### Background
+## Background
 
 In contrast with server-side or other service-type applications, client side apps typically operate in the context of a single user.
 Most feature flagging SDKs for these applications have been designed with this in mind.
@@ -28,7 +28,7 @@ This paradigm doesn't fit well with the existing SDK, which, like most server-si
 
 Though not all client side SDKs function in this way, those that do allow context per evaluation can conform to this model fairly easily.
 
-### Design
+## Design
 
 To better support the "single-context" paradigm we need to define some additional handlers and add some flexibility to current APIs.
 In short, the application author now sets context globally using the existing global context mutator on the OpenFeature API object.
@@ -36,9 +36,9 @@ This single context is used by providers for initialization and fetching evaluat
 All evaluations functions are "context-less".
 When the context is changed, providers are signalled to update their cache of evaluated flags.
 
-#### Provider changes
+### Provider changes
 
-###### On-context-set handler
+#### On-context-set handler
 
 Providers may need a mechanism to understand when their cache of evaluated flags must be invalidated or updated. An `on-context-set` handler can be defined which performs whatever operations are needed to reconcile the evaluated flags with the new context. The OpenFeature SDK calls this handler when the global context is modified.
 
@@ -56,7 +56,7 @@ interface Provider {
 
 While the `on-context-set` handler is executing, the cache of resolved flags may be considered "stale". `Provider authors` and `application authors` should understand the consequences of evaluating flags in this state.
 
-###### Initialize function
+#### Initialize function
 
 Providers may need access to the static context when they start up.
 Passing this in the provider constructor is not always possible, and ergonomics are improved by separating configuration and evaluation.
@@ -76,9 +76,9 @@ interface Provider {
 > NOTE: The provider interface will retain the context parameter.
 The parameter will be supplied by the SDK from the global context.
 
-#### Client changes
+### Client changes
 
-##### Remove evaluation-context parameter on evaluation functions
+#### Remove evaluation-context parameter on evaluation functions
 
 Similarly to the changes in the provider, the evaluator functions on the client do not accept a context.
 
@@ -94,13 +94,13 @@ interface Client {
 }
 ```
 
-##### Remove context mutator
+#### Remove context mutator
 
 The global context has a one-to-one correspondence to the providers cache of evaluated flags. It's unreasonable or impossible to reconcile multiple client-level contexts with this state. The context mutator of the client must be removed.
 
-#### Hook changes
+### Hook changes
 
-##### Remove return value from before stage
+#### Remove return value from before stage
 
 Context cannot be modified at evaluation, so `before` stage 
 

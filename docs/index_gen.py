@@ -30,7 +30,7 @@ script_directory = os.path.join(script_directory, 'source')
 index_content = "# OFEP Index\n"
 
 for filename in os.listdir(script_directory):
-    if filename.endswith('.md'):
+    if filename.endswith('.md') and filename.find('OFEP')!=-1:
         with open(os.path.join(script_directory, filename), 'r') as file:
             md_content = file.read()
             frontmatter = parse_frontmatter(md_content)
