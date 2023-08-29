@@ -1,15 +1,15 @@
 ---
 OFEP: 2
-title: 'Specification 0.6.0'
+title: 'Kubecon Demo'
 status: Approved
-date: 2023-05-24
-authors: [Michael Beemer, David Hirsch]
+date: 2022-07-12
+authors: [Alex Jones]
 tags: [spec, specification, sdk]
 
 ---
 # 002-OFEP-kubecon-demo
 
-### State: APPROVED
+## State: APPROVED
 
 I believe we need to have some really good examples of feature-flagging on both the client/developer side and also used in infrastructure scenarios.
 
@@ -22,16 +22,17 @@ The following proposal is to build a demo image admission application that could
 
 Comments welcome.
 
-<img src="images/002-01.png" width="300">
+<!-- <img src="images/002-01.png" width="300"> -->
+![unlabelled_image](images/002-01.png "unlabelled_image")
 
-### Work involved
+## Work involved
 
 - Write a CUE based ievaluator
 - Extend Openfeature operator to read CUE based configuration
 - Write the demo image admission controller
 
 
-### End-user takeaways
+## End-user takeaways
 
 Featureflags can be used at the infrastructure level
 OpenFeature operator and FlagD allow you to build against them with no real work required to integrate ( evaluator included ).

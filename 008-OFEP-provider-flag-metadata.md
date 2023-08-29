@@ -1,29 +1,29 @@
 ---
 OFEP: 8
-title: 'Specification 0.6.0'
+title: 'Surfacing Flag Metadata'
 status: Approved
-date: 2023-05-24
-authors: [Michael Beemer, David Hirsch]
+date: 2022-11-17
+authors: [Pete Hodgson]
 tags: [spec, specification, sdk]
 
 ---
-# OFEP-007: Surfacing flag metadata
+# 008-OFEP-Surfacing flag metadata
 
-### State: APPROVED
+## State: APPROVED
 This proposal lays out a mechanism for flag providers to surface arbitrary flag metadata to Open Feature, and for hooks to access this metadata.
 
 
-### Background
+## Background
 
 Flag providers maintain metadata about a feature flag, and there are scenarios where a hook might benefit from being able to access this metadata. For example, a flag provider could surface a `management-url` attribute which an open-telemetry hook could then add to an otel span, allowing someone viewing a trace for a feature-flagged operation to easily navigate to a webpage describing that flag in detail.
 
 Different providers will expose different kinds of metadata, and different Application Integrators will want to consume that metadata in different ways. As such, the goal of this proposal is to provide a simple way for the Open Feature runtime to pass generic metadata from a provider to a hook, without Open Feature itself understanding the semantics of that metadata.
 
-### Non-goals
+## Non-goals
 
 In the future we may wish to standardize the semantics of some key metadata attributes which are common amongst many providers (e.g. `expiration-date`, `owner`, `management-url`) so that provider-agnostic hooks can be created to consume these standard attributes, but that is explicitly NOT in the scope of this OFEP - we would prefer to see which common attributes naturally emerge and then "pave those cow paths".
 
-### Proposal
+## Proposal
 
 The Open Feature spec will be extended in two ways:
 - a flag provider will be able to provide a bag of metadata attributes for a feature flag. This bag will be a set of key-value pairs, where the key will be a string and the value will be a small set of primitive values.
@@ -39,7 +39,7 @@ The flagMetadata field MAY return an empty record. A missing `flagMetadata` fiel
 
 Since hooks are provided the evaluation context, they would have access to any flag metadata that the provider provides.
 
-#### other details
+### other details
 
 The flagMetadata field should be considered immutable. We won't support adding/removing/editing metadata in hooks, for example.
 

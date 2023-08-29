@@ -1,28 +1,29 @@
 ---
 OFEP: 10
-title: 'Specification 0.6.0'
+title: 'gRPC sync support to Flagd'
 status: Approved
-date: 2023-05-24
-authors: [Michael Beemer, David Hirsch]
+date: 2023-02-03
+authors: [Kavindu Dodanduwa]
 tags: [spec, specification, sdk]
 
 ---
-# OFEP: Add gRPC sync support to flagd
+# 010-OFEP-Add gRPC sync support to flagd
 
-### State: APPROVED
+## State: APPROVED
 
 This OFEP proposes to introduce gRPC syncs to flagd. gRPC sync will act similar to existing remote HTTP URL syncs. But
 going beyond periodic pulls, flagd can utilize gRPC server streaming to receive near real-time updates, pushed from a
 flag management system.
 
-### Background
+## Background
 
 gRPC server streaming allows clients to listen and react to server-pushed data. For flagd, this perfectly matches the
 ISync interface and current sync mechanism implementations.
 
 The gRPC schema will be defined by flagd and supporting flag management system(s) will then implement the contract.
 
-<img src="images/ofep-fd-grpc-1.png" width="300">
+<!-- <img src="images/ofep-fd-grpc-1.png" width="300"> -->
+![unlabelled_image](images/ofep-fd-grpc-1.png "unlabelled_image")
 
 Further, grpc server push can be expanded to have `event types` such as flag additions, updates and deletions, giving more
 performant connectivity between flagd and flag management system. Performance improvements come from reduced payload
@@ -33,9 +34,10 @@ a state management system to derive the matching event type for a specific flag 
 flagd must not maintain any state (i.e- flagd must be stateless) and only react on the sync type to update flag 
 configurations.
 
-<img src="images/ofep-fd-grpc-2.png" width="300">
+<!-- <img src="images/ofep-fd-grpc-2.png" width="300"> -->
+![unlabelled_image](images/ofep-fd-grpc-2.png "unlabelled_image")
 
-#### Tasks
+### Tasks
 
 Following are the main tasks I am proposing for the implementation.
 
@@ -44,7 +46,7 @@ Following are the main tasks I am proposing for the implementation.
 - [ ] Introduce basic grpc sync, with minimal configuration options
 - [ ] Introduce additional options, such as TLS certificates, token authentication on top of existing solution
 
-###### SSL certificates and token authentication
+#### SSL certificates and token authentication
 
 Consider the GRPC authentication example provided through official Go guide - [Link](https://github.com/grpc/grpc-go/tree/master/examples/features/authentication)
 
