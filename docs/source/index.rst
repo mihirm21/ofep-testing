@@ -1,18 +1,26 @@
-.. OFEP-TESTING documentation master file, created by
-   sphinx-quickstart on Sat Jun  3 19:08:30 2023.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
-Welcome to OFEP-TESTING's documentation!
+Welcome to OFEP-TESTING documentation 
 ========================================
-
-.. toctree::
+ .. toctree::
    :titlesonly:
-   :maxdepth: 2
-   :hidden:
+   :maxdepth: 1
+   :caption: OFEP Documentation
 
+   016-OFEP-provider-metadata-capability-discovery
+   015-OFEP-provider-client-mapping
+   017-OFEP-single-context-paradigm
+   014-OFEP-ofo-flagd-client-support
+   001-OFEP-cloud-native-pattern
+   007-OFEP-flag-change-events
+   004-OFEP-kubernetes-sync-service
+   003-OFEP-CUE-upstream
+   009-OFEP-add-dispose
+   012-OFEP-inline-evaluation
+   006-OFEP-flagd-sockets
+   011-OFEP-transaction-context-propagation
+   005-OFEP-provider-hook
+   000-OFEP-template
+   002-OFEP-kubecon-demo
+   013-OFEP-ofo-flag-service
+   008-OFEP-provider-flag-metadata
    OFEP_Index
-   ofep_docs
-
-
-
+   010-OFEP-flagd-grpc-sync
