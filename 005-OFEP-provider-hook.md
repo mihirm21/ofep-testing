@@ -1,10 +1,10 @@
 ---
 OFEP: 5
-title: 'Provider Hook'
+title: Provider Hook
 status: Approved
 date: 2022-07-30
 authors: [Shantanu Sen]
-tags: [spec, specification, sdk]
+tags: [sdk]
 
 ---
 # 005-OFEP-provider-hook

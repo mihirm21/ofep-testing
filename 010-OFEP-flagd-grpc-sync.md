@@ -1,10 +1,10 @@
 ---
 OFEP: 10
-title: 'gRPC sync support to Flagd'
+title: gRPC sync support to Flagd
 status: Approved
 date: 2023-02-03
 authors: [Kavindu Dodanduwa]
-tags: [spec, specification, sdk]
+tags: [flagd]
 
 ---
 # 010-OFEP-Add gRPC sync support to flagd

@@ -1,6 +1,6 @@
 ---
 OFEP: 9
-title: 'Dispose Functionality To API'
+title: Dispose Functionality To API
 status: Approved
 date: 2023-05-19
 authors: [Todd Baert ,Weyert de Boer]

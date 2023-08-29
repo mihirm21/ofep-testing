@@ -1,10 +1,10 @@
 ---
 OFEP: 6
-title: 'Flagd Sockets'
+title: Flagd Sockets
 status: Approved
 date: 2022-08-09
 authors: [Alex Jones]
-tags: [spec, specification, sdk]
+tags: [flagd]
 
 ---
 

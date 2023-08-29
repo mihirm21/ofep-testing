@@ -1,10 +1,10 @@
 ---
 OFEP: 2
-title: 'Kubecon Demo'
+title: Kubecon Demo
 status: Approved
 date: 2022-07-12
 authors: [Alex Jones]
-tags: [spec, specification, sdk]
+tags: [flagd, ofo]
 
 ---
 # 002-OFEP-kubecon-demo

@@ -1,10 +1,10 @@
 ---
 OFEP: 14
-title: 'Flagd Client Support driven by OFO'
+title: Flagd Client Support driven by OFO
 status: Withdrawn
 date: 2023-03-24
 authors: [Skye Gill]
-tags: [spec, specification, sdk]
+tags: [flagd, ofo]
 
 ---
 # 014-OFEP-flagd client support driven by OpenFeature Operator

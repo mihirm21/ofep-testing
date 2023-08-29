@@ -1,10 +1,10 @@
 ---
 OFEP: 8
-title: 'Surfacing Flag Metadata'
+title: Surfacing Flag Metadata
 status: Approved
 date: 2022-11-17
 authors: [Pete Hodgson]
-tags: [spec, specification, sdk]
+tags: [spec]
 
 ---
 # 008-OFEP-Surfacing flag metadata

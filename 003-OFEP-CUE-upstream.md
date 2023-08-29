@@ -1,10 +1,10 @@
 ---
 OFEP: 3
-title: 'CUE Upstream'
+title: CUE Upstream
 status: Draft
 date: 2022-07-12
 authors: [Alex Jones]
-tags: [spec, specification, sdk]
+tags: [flagd, spec]
 
 ---
 # 003-OFEP-CUE-upstream

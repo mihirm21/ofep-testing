@@ -1,10 +1,10 @@
 ---
 OFEP: 11
-title: 'Transaction Context Propagation'
+title: Transaction Context Propagation
 status: Approved
 date: 2023-04-15
 authors: [Michael Beemer, Todd Baert, Evan Bradley]
-tags: [spec, specification, sdk]
+tags: [specification, sdk]
 
 ---
 # 011-OFEP-Transaction Context Propagation

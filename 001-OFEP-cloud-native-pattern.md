@@ -1,6 +1,6 @@
 ---
 OFEP: 1
-title: 'Cloud Native Pattern'
+title: Cloud Native Pattern
 status: Approved
 date: 2022-07-12
 authors: [Alex Jones]

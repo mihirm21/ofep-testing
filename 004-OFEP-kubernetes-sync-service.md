@@ -1,10 +1,10 @@
 ---
 OFEP: 4
-title: 'Inotfiy Interface'
+title: Inotfiy Interface
 status: Approved
 date: 2022-09-15
 authors: [Alex Jones]
-tags: [spec, specification, sdk]
+tags: [flagd, ofo]
 
 ---
 # 004-OFEP-inotfiy-interface
