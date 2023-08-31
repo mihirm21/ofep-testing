@@ -1,8 +1,7 @@
 ---
-OFEP: 12
+date: 2023-03-16
 title: Inline Evaluation of Flag Rules
 status: Rejected
-date: 2023-03-16
 authors: [Justin Abrahms, Pete Hodgson]
 tags: [flagd]
 

@@ -1,10 +1,9 @@
 ---
-OFEP: 2
-title: 'Kubecon Demo'
-status: Approved
 date: 2022-07-12
+title: Kubecon Demo
+status: Approved
 authors: [Alex Jones]
-tags: [spec, specification, sdk]
+tags: [flagd, ofo]
 
 ---
 # 002-OFEP-kubecon-demo
@@ -22,8 +21,8 @@ The following proposal is to build a demo image admission application that could
 
 Comments welcome.
 
-<!-- <img src="images/002-01.png" width="300"> -->
 ![unlabelled_image](images/002-01.png "unlabelled_image")
+
 
 ## Work involved
 

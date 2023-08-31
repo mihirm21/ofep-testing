@@ -1,5 +1,6 @@
 import os
 import re
+from datetime import datetime
 
 # Define a function to parse frontmatter data
 def parse_frontmatter(md_content):
@@ -30,32 +31,35 @@ script_directory = os.path.join(script_directory, 'source')
 index_content = "# OFEP Index\n"
 
 for filename in os.listdir(script_directory):
-    if filename.endswith('.md') and filename.find('OFEP')!=-1:
+    if filename.endswith('.md') and filename.find('OFEP') != -1:
         with open(os.path.join(script_directory, filename), 'r') as file:
             md_content = file.read()
             frontmatter = parse_frontmatter(md_content)
             ofep_status = frontmatter.get('status', 'Unknown')
 
             if ofep_status in status_to_ofeps:
+                date_str = frontmatter.get('date', '1970-01-01')
+                date_obj = datetime.strptime(date_str, '%Y-%m-%d')
                 authors_list = ', '.join([author.strip() for author in re.findall(r'\[(.*?)\]', frontmatter.get('authors', ''))])
                 tags_list = ', '.join([tag.strip() for tag in re.findall(r'\[(.*?)\]', frontmatter.get('tags', ''))])
-                status_to_ofeps[ofep_status].append((int(frontmatter['OFEP']), frontmatter['title'], authors_list, tags_list, filename))
+                status_to_ofeps[ofep_status].append((date_obj, frontmatter['title'], authors_list, tags_list, filename))
 
-# Sort OFEPs in each category by OFEP number
+# Sort OFEPs in each category by date
 for status, ofeps in status_to_ofeps.items():
-    status_to_ofeps[status] = sorted(ofeps, key=lambda x: x[0])
+    status_to_ofeps[status] = sorted(ofeps, key=lambda x: x[0], reverse=True)
 
 # Generate the index content with the table
 index_content += "\n"
 
 for status, ofeps in status_to_ofeps.items():
     index_content += f"## {status}\n\n"
-    index_content += "| OFEP Number | Title | Authors | Tags |\n"
-    index_content += "|-------------|-------|---------|------|\n"
-    
-    for ofep_number, title, authors_list, tags_list, filename in ofeps:
-        index_content += f"| [{ofep_number}]({filename}) | {title} | {authors_list} | {tags_list} |\n"
-        
+    index_content += "| Date         | Title | Authors | Tags |\n"
+    index_content += "|--------------|-------|---------|------|\n"
+
+    for date_obj, title, authors_list, tags_list, filename in ofeps:
+        formatted_date = date_obj.strftime('%dth %b %Y')  # Format as "25th May 2023"
+        index_content += f"| {formatted_date} | [{filename}]({filename}) | {title} | {authors_list} | {tags_list} |\n"
+
     index_content += "\n"
 
 # Write the index to a file

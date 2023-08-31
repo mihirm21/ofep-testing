@@ -1,10 +1,9 @@
 ---
-OFEP: 15
-title: 'Provider-Client Mapping'
-status: Approved
 date: 2023-04-27
+title: Provider-Client Mapping
+status: Approved
 authors: [Justin Abrahms]
-tags: [spec, specification, sdk]
+tags: [spec]
 
 ---
 # 015-OFEP-Provider to client mapping

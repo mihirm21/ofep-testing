@@ -1,8 +1,7 @@
 ---
-OFEP: 4
+date: 2022-09-15
 title: Inotfiy Interface
 status: Approved
-date: 2022-09-15
 authors: [Alex Jones]
 tags: [flagd, ofo]
 
@@ -39,8 +38,8 @@ type ISync interface {
 
 
 
-<!-- <img src="images/004-01.png" width="650px;"> -->
 ![unlabelled_image](images/004-01.png "unlabelled_image")
+
 
 ### Realtime updates
 - Shared informer factory will need to be extended to support the FeatureFlagConfiguration type through the restful API.
@@ -63,8 +62,8 @@ informer := config.InformerFactory.InformerFor(&batch_v1.Job{}, func(client kube
 
 I believe a _sharedinformer_ might be appropriate over indexed, unless we're looping over all the featureflagconfigurations in the cluster and they list in their hundreds.
 
-<!-- <img src="images/004-02.png" width="850px;"> -->
 ![unlabelled_image](images/004-02.png "unlabelled_image")
+
 
 
 ## Benefits

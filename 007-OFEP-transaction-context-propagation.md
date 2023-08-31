@@ -1,8 +1,7 @@
 ---
-OFEP: 11
+date: 2023-04-15
 title: Transaction Context Propagation
 status: Approved
-date: 2023-04-15
 authors: [Michael Beemer, Todd Baert, Evan Bradley]
 tags: [specification, sdk]
 

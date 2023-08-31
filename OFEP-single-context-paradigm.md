@@ -1,10 +1,9 @@
 ---
-OFEP: 17
-title: 'Single Context Paradigm'
-status: Approved
 date: 2023-05-19
+title: Single Context Paradigm
+status: Approved
 authors: [Todd Baert]
-tags: [spec, specification, sdk]
+tags: [sdk]
 
 ---
 # 017-OFEP-single-context-paradigm

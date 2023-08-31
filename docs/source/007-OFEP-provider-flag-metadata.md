@@ -1,8 +1,7 @@
 ---
-OFEP: 8
+date: 2022-11-17
 title: Surfacing Flag Metadata
 status: Approved
-date: 2022-11-17
 authors: [Pete Hodgson]
 tags: [spec]
 

@@ -1,8 +1,7 @@
 ---
-OFEP: 14
+date: 2023-03-24
 title: Flagd Client Support driven by OFO
 status: Withdrawn
-date: 2023-03-24
 authors: [Skye Gill]
 tags: [flagd, ofo]
 

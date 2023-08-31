@@ -1,8 +1,7 @@
 ---
-OFEP: 13
+date: 2023-03-24
 title: Flag Service Deployment by OFO
 status: Approved
-date: 2023-03-24
 authors: [Skye Gill]
 tags: [flagd, ofo]
 

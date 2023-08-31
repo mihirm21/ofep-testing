@@ -5,22 +5,26 @@ Welcome to OFEP-TESTING documentation
    :maxdepth: 1
    :caption: OFEP Documentation
 
-   016-OFEP-provider-metadata-capability-discovery
-   015-OFEP-provider-client-mapping
-   017-OFEP-single-context-paradigm
-   014-OFEP-ofo-flagd-client-support
+   OFEP-flagd-grpc-sync
+   007-OFEP-provider-flag-metadata
    001-OFEP-cloud-native-pattern
    007-OFEP-flag-change-events
+   007-OFEP-transaction-context-propagation
+   OFEP-provider-metadata-capability-discovery
    004-OFEP-kubernetes-sync-service
    003-OFEP-CUE-upstream
+   OFEP-ofo-flag-service
+   OFEP-ofo-flagd-client-support
+   OFEP-provider-client-mapping
+   011-OFEP-sdk-wait-provider-ready
    009-OFEP-add-dispose
-   012-OFEP-inline-evaluation
    006-OFEP-flagd-sockets
-   011-OFEP-transaction-context-propagation
+   010-OFEP-flagd-project-charter
    005-OFEP-provider-hook
    000-OFEP-template
    002-OFEP-kubecon-demo
-   013-OFEP-ofo-flag-service
-   008-OFEP-provider-flag-metadata
+   OFEP-single-context-paradigm
    OFEP_Index
-   010-OFEP-flagd-grpc-sync
+   OFEP-sdk-e2e-test-strategy
+   OFEP-inline-evaluation
+   OFEP-metric-hooks

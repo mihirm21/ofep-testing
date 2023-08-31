@@ -1,8 +1,7 @@
 ---
-OFEP: 7
+date: 2023-03-14
 title: Flag Change Events
 status: Approved
-date: 2023-03-14
 authors: [Michael Beemer, Todd Baert, Justin Abrahms]
 tags: [flagd, sdk]
 

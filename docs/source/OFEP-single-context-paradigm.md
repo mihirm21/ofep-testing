@@ -1,8 +1,7 @@
 ---
-OFEP: 17
+date: 2023-05-19
 title: Single Context Paradigm
 status: Approved
-date: 2023-05-19
 authors: [Todd Baert]
 tags: [sdk]
 

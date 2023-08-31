@@ -1,8 +1,7 @@
 ---
-OFEP: 16
+date: 2023-04-15
 title: Provider-Metadata-Capability-Discovery
 status: Approved
-date: 2023-04-15
 authors: [Todd Baert]
 tags: [specification, sdk]
 

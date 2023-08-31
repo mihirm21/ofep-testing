@@ -1,8 +1,7 @@
 ---
-OFEP: 1
-title: 'Cloud Native Pattern'
-status: Approved
 date: 2022-07-12
+title: Cloud Native Pattern
+status: Approved
 authors: [Alex Jones]
 tags: [cloud-native]
 
@@ -60,7 +59,7 @@ The job of this webhook is to run after the validating admission component and i
 
 This webhook will deal with configuration such as open port, transport type and configuration path locations ( possibly expanding to backing type such as PVC vs configmap ).
 
-## Configuration reloading
+### Configuration reloading
 ![unlabelled_image](images/001-02.png "unlabelled_image")
 
 In the scenario of a feature flag being altered, the configuration would be modified directly by the controller-manager and the agent would micro reload to present to the host container ( perhaps using the confd workflow ).
@@ -100,7 +99,6 @@ In addition, when the API server fails or restarts all calls will start timing o
 ![unlabelled_image](images/001-03.png "unlabelled_image")
 
 
-
 Let me know your thoughts
 
 
@@ -108,11 +106,12 @@ Let me know your thoughts
 
 ![unlabelled_image](images/001-04.png "unlabelled_image")
 
+
 ## Post Kubecon configuration 
 
 We had a meet up at Kubecon that touched on a few key issues that have helped to improve and inform this design pattern.
 
-## remote endpoint configuration
+### remote endpoint configuration
 
 Given that we want to accommodate vendors and enable them within this ecosystem, we are going to introduce a concept that allows for the Flag Custom Resource to indicate the desire for a remote endpoint point. To that end, it will enable a completely new set of capabilities from the host vendor to interact at the pod level with processes for the cloud-native provider. It serves as a mechanism to instigate a remote fetch capability that would merge or override the local configuration within the custom resource.
 
@@ -126,13 +125,14 @@ remoteFlagProvider:
 Agent
 ```
 
-## Integration points
+### Integration points
 
 In order to enable host containers to consume the sidecar then there should be multiple protocols to do so.
 There was an initial proposal to incorporate the AF_LOCAL/AF_UNIX socket family and within that family, we should decide whether is a need to support SOCK_STREAM and SOCK_DGRAM, I would initially suggest only supporting SOCK_STREAM.
 This would enable us to further layer HTTP protocol support on top where required.
 
 ![unlabelled_image](images/001-05.png "unlabelled_image")
+
 
 ## Flow
 The below illustration has been updated also to reflect the current thinking around the initialisation flow of the flagging system.
