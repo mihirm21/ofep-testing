@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OFEP-hook-for-metrics &mdash; OFEP-TESTING 1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="012-OFEP-Inline Evaluation of Flag Rules" href="OFEP-inline-evaluation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            OFEP-TESTING
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">OFEP Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="OFEP_Index.html">OFEP Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OFEP-flagd-grpc-sync.html">010-OFEP-Add gRPC sync support to flagd</a></li>
+<li class="toctree-l1"><a class="reference internal" href="007-OFEP-provider-flag-metadata.html">008-OFEP-Surfacing flag metadata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="001-OFEP-cloud-native-pattern.html">001-OFEP-cloud-native-pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="007-OFEP-flag-change-events.html">007-OFEP-flag-change-events</a></li>
+<li class="toctree-l1"><a class="reference internal" href="007-OFEP-transaction-context-propagation.html">011-OFEP-Transaction Context Propagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OFEP-provider-metadata-capability-discovery.html">016-OFEP-provider-metadata-capability-discovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="004-OFEP-kubernetes-sync-service.html">004-OFEP-inotfiy-interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="003-OFEP-CUE-upstream.html">003-OFEP-CUE-upstream</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OFEP-ofo-flag-service.html">013-OFEP-flag service deployment driven by OpenFeature Operator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OFEP-ofo-flagd-client-support.html">014-OFEP-flagd client support driven by OpenFeature Operator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OFEP-provider-client-mapping.html">015-OFEP-Provider to client mapping</a></li>
+<li class="toctree-l1"><a class="reference internal" href="011-OFEP-sdk-wait-provider-ready.html">OFEP-sdk-wait-provider-ready</a></li>
+<li class="toctree-l1"><a class="reference internal" href="009-OFEP-add-dispose.html">009-OFEP-Add dispose functionality to API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="006-OFEP-flagd-sockets.html">006-OFEP-flagd-sockets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="010-OFEP-flagd-project-charter.html">Make flagD a full sub-project of OpenFeature</a></li>
+<li class="toctree-l1"><a class="reference internal" href="005-OFEP-provider-hook.html">005-OFEP-provider-hook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="000-OFEP-template.html">Name</a></li>
+<li class="toctree-l1"><a class="reference internal" href="002-OFEP-kubecon-demo.html">002-OFEP-kubecon-demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OFEP-single-context-paradigm.html">017-OFEP-single-context-paradigm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OFEP-sdk-e2e-test-strategy.html">SDK end-to-end test strategy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OFEP-inline-evaluation.html">012-OFEP-Inline Evaluation of Flag Rules</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">OFEP-hook-for-metrics</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">OFEP-TESTING</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">OFEP-hook-for-metrics</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/OFEP-metric-hooks.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="ofep-hook-for-metrics">
+<h1>OFEP-hook-for-metrics<a class="headerlink" href="#ofep-hook-for-metrics" title="Permalink to this heading"></a></h1>
+<section id="state-approved">
+<h2>State: APPROVED<a class="headerlink" href="#state-approved" title="Permalink to this heading"></a></h2>
+<p>This OFEP proposes to introduce an OpenFeature hook for OpenTelemetry metrics.</p>
+</section>
+<section id="background">
+<h2>Background<a class="headerlink" href="#background" title="Permalink to this heading"></a></h2>
+<p>We already have OpenTelemetry Span support through hooks. Similarly, we can provide a dedicated hook for OpenTelemetry
+metrics. Providing an easy method to collect standardized telemetry data will make OpenFeature attractive for both users and vendors.</p>
+</section>
+<section id="proposal">
+<h2>Proposal<a class="headerlink" href="#proposal" title="Permalink to this heading"></a></h2>
+<p>The proposal here is to define a set of metrics that can be used with different hook stages. For example, error metrics
+can be collected at the hook’s <code class="docutils literal notranslate"><span class="pre">error</span></code> stage. Going with this background, I propose the following metrics.</p>
+</section>
+<section id="metrics">
+<h2>Metrics<a class="headerlink" href="#metrics" title="Permalink to this heading"></a></h2>
+<p>All metrics defined through this proposal carry OpenTelemetry semantic conventions defined attributes(dimensions)[1].</p>
+<ul class="simple">
+<li><p>feature_flag.key: The unique identifier of the feature flag</p></li>
+<li><p>feature_flag.provider_name: The name of the service provider that performs the flag evaluation</p></li>
+<li><p>feature_flag.variant: SHOULD be a semantic identifier for a value. If one is unavailable, a stringified version of
+the value can be used</p></li>
+</ul>
+<p>Given below is the list of metrics proposed and their usage,</p>
+<section id="feature-flag-evaluation-request-total">
+<h3>feature_flag.evaluation_request_total<a class="headerlink" href="#feature-flag-evaluation-request-total" title="Permalink to this heading"></a></h3>
+<p>A counter[2] based metric to calculate the number of flag evaluation requests. This is recorded at <code class="docutils literal notranslate"><span class="pre">before</span></code> stage of
+the hook.</p>
+<p>This metric is useful to understand flag evaluation requests received through OpenFeature SDK.</p>
+</section>
+<section id="feature-flag-evaluation-success-total">
+<h3>feature_flag.evaluation_success_total<a class="headerlink" href="#feature-flag-evaluation-success-total" title="Permalink to this heading"></a></h3>
+<p>A counter[2] based metric to calculate the number of successful flag evaluations. This is recorded at <code class="docutils literal notranslate"><span class="pre">after</span></code> stage of
+the hook.</p>
+<p>This metric is useful for understanding successful flag evaluations. This metric contains the following extra dimension(s),</p>
+<ul class="simple">
+<li><p>reason : evaluation reason extracted from flag resolution details[3]</p></li>
+</ul>
+</section>
+<section id="feature-flag-evaluation-error-total">
+<h3>feature_flag.evaluation_error_total<a class="headerlink" href="#feature-flag-evaluation-error-total" title="Permalink to this heading"></a></h3>
+<p>A counter[2] based metric to calculate the number of failed flag evaluations. This is recorded at the <code class="docutils literal notranslate"><span class="pre">error</span></code> stage of
+the hook.</p>
+<p>This metric is useful for understanding flag evaluation errors. This metric contains the following extra dimension(s),</p>
+<ul class="simple">
+<li><p>exception : error/exception message extracted from the evaluation error</p></li>
+</ul>
+</section>
+<section id="feature-flag-evaluation-active-count">
+<h3>feature_flag.evaluation_active_count<a class="headerlink" href="#feature-flag-evaluation-active-count" title="Permalink to this heading"></a></h3>
+<p>An UpDownCounter[4] based metric to calculate the number of active flag evaluations currently going through
+OpenFeature SDK. This is increased at <code class="docutils literal notranslate"><span class="pre">before</span></code> stage and decreased at <code class="docutils literal notranslate"><span class="pre">finally</span></code> stage.</p>
+<p>Given the evaluation is fast, the value observed here can be 0. However, when there are bottlenecks or provider
+slowdowns, this will be a non-zero value.</p>
+</section>
+</section>
+<section id="extra-dimensions">
+<h2>Extra dimensions<a class="headerlink" href="#extra-dimensions" title="Permalink to this heading"></a></h2>
+<p>If needed, extra dimensions can be added to any of the above metrics. To provide this flexibility, language specific
+implementations should support constructor options to the hook. For example, in Go, this can look like below,</p>
+<div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="nx">NewMetricsHook</span><span class="p">(</span><span class="nx">reader</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">WithFlagMetadataDimensions</span><span class="p">(</span>
+<span class="w">        </span><span class="nx">DimensionDescription</span><span class="p">{</span>
+<span class="w">            </span><span class="nx">Key</span><span class="p">:</span><span class="w">  </span><span class="s">&quot;scope&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">Type</span><span class="p">:</span><span class="w"> </span><span class="nx">String</span><span class="p">,</span>
+<span class="w">        </span><span class="p">}))</span>
+</pre></div>
+</div>
+<p>Given below are proposed extra dimensions.</p>
+<section id="scope-mapped-from-flag-metadata">
+<h3>Scope (mapped from flag metadata)<a class="headerlink" href="#scope-mapped-from-flag-metadata" title="Permalink to this heading"></a></h3>
+<p>credits - Michael Beemer</p>
+<p>It is possible to add an additional dimension representing the configuration of the feature flag being evaluated. A
+feature flag usually has a scope such as a project, workspace, namespace, or application. This can be further
+expanded to environment-specific configurations such as dev, hardening, and production or the cloud provider such as
+AWS, Azure or GCP. Adding this dimension through an agreed attribute name (suggested name - <code class="docutils literal notranslate"><span class="pre">scope</span></code>) benefits metric
+evaluations (ex:- drill down to cloud provider specific flag evaluations).</p>
+</section>
+</section>
+<section id="expansion-options">
+<h2>Expansion options<a class="headerlink" href="#expansion-options" title="Permalink to this heading"></a></h2>
+<p>Below are future expansions that can be built on top of the metrics hook. These options will not be
+implemented as they require further discussions and agreements from the community.</p>
+<section id="metric-to-measure-latency">
+<h3>Metric to measure latency<a class="headerlink" href="#metric-to-measure-latency" title="Permalink to this heading"></a></h3>
+<p>credits - Justin Abrahms</p>
+<p>Flag evaluation latency can be calculated with time measurements between <code class="docutils literal notranslate"><span class="pre">finally</span></code> and <code class="docutils literal notranslate"><span class="pre">before</span></code> stages. However,
+this requires time measurement to be shared between two stages, which require either a context propagation or a shared
+variable (potentially a map). Alternatively, SDK could mark the evaluation start timestamp to enhance the accuracy
+of the measurement</p>
+</section>
+</section>
+<section id="implementation-considerations">
+<h2>Implementation considerations<a class="headerlink" href="#implementation-considerations" title="Permalink to this heading"></a></h2>
+<p>Most of the OpenFeature SDKs already have support for Span hooks. The metrics hook proposed through this OFEP should be
+implemented into the same package to reduce release and maintenance efforts. However, if there is a significant
+impact (ex:- dependency size for example in java jar), then the implementation may be done in a dedicated package.</p>
+</section>
+<section id="code-example">
+<h2>Code Example<a class="headerlink" href="#code-example" title="Permalink to this heading"></a></h2>
+<p>Consider following coding example in Go for usage of the hook.</p>
+<div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="c1">// Reader should be derived or injected </span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">reader</span><span class="w"> </span><span class="nx">metric</span><span class="p">.</span><span class="nx">Reader</span>
+
+<span class="c1">// Derive metric hook from reader</span>
+<span class="nx">metricsHook</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">hooks</span><span class="p">.</span><span class="nx">NewMetricsHook</span><span class="p">(</span><span class="nx">reader</span><span class="p">)</span>
+
+<span class="c1">// Register OpenFeature API hooks</span>
+<span class="nx">openfeature</span><span class="p">.</span><span class="nx">AddHooks</span><span class="p">(</span><span class="nx">metricsHook</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Injected <code class="docutils literal notranslate"><span class="pre">metric.Reader</span></code> will perform the metric export and API is simple enough for developers.</p>
+<section id="references">
+<h3>References<a class="headerlink" href="#references" title="Permalink to this heading"></a></h3>
+<p>[1] - https://opentelemetry.io/docs/specs/otel/logs/semantic_conventions/feature-flags/</p>
+<p>[2] - https://opentelemetry.io/docs/specs/otel/metrics/api/#counter</p>
+<p>[3] - https://openfeature.dev/specification/types#resolution-details</p>
+<p>[4] - https://opentelemetry.io/docs/specs/otel/metrics/api/#updowncounter</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="OFEP-inline-evaluation.html" class="btn btn-neutral float-left" title="012-OFEP-Inline Evaluation of Flag Rules" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Mihir Mittal.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

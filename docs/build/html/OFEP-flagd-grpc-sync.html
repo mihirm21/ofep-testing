@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>010-OFEP-Add gRPC sync support to flagd &mdash; OFEP-TESTING 1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="008-OFEP-Surfacing flag metadata" href="007-OFEP-provider-flag-metadata.html" />
+    <link rel="prev" title="OFEP Index" href="OFEP_Index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            OFEP-TESTING
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">OFEP Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="OFEP_Index.html">OFEP Index</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">010-OFEP-Add gRPC sync support to flagd</a></li>
+<li class="toctree-l1"><a class="reference internal" href="007-OFEP-provider-flag-metadata.html">008-OFEP-Surfacing flag metadata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="001-OFEP-cloud-native-pattern.html">001-OFEP-cloud-native-pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="007-OFEP-flag-change-events.html">007-OFEP-flag-change-events</a></li>
+<li class="toctree-l1"><a class="reference internal" href="007-OFEP-transaction-context-propagation.html">011-OFEP-Transaction Context Propagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OFEP-provider-metadata-capability-discovery.html">016-OFEP-provider-metadata-capability-discovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="004-OFEP-kubernetes-sync-service.html">004-OFEP-inotfiy-interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="003-OFEP-CUE-upstream.html">003-OFEP-CUE-upstream</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OFEP-ofo-flag-service.html">013-OFEP-flag service deployment driven by OpenFeature Operator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OFEP-ofo-flagd-client-support.html">014-OFEP-flagd client support driven by OpenFeature Operator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OFEP-provider-client-mapping.html">015-OFEP-Provider to client mapping</a></li>
+<li class="toctree-l1"><a class="reference internal" href="011-OFEP-sdk-wait-provider-ready.html">OFEP-sdk-wait-provider-ready</a></li>
+<li class="toctree-l1"><a class="reference internal" href="009-OFEP-add-dispose.html">009-OFEP-Add dispose functionality to API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="006-OFEP-flagd-sockets.html">006-OFEP-flagd-sockets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="010-OFEP-flagd-project-charter.html">Make flagD a full sub-project of OpenFeature</a></li>
+<li class="toctree-l1"><a class="reference internal" href="005-OFEP-provider-hook.html">005-OFEP-provider-hook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="000-OFEP-template.html">Name</a></li>
+<li class="toctree-l1"><a class="reference internal" href="002-OFEP-kubecon-demo.html">002-OFEP-kubecon-demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OFEP-single-context-paradigm.html">017-OFEP-single-context-paradigm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OFEP-sdk-e2e-test-strategy.html">SDK end-to-end test strategy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OFEP-inline-evaluation.html">012-OFEP-Inline Evaluation of Flag Rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OFEP-metric-hooks.html">OFEP-hook-for-metrics</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">OFEP-TESTING</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">010-OFEP-Add gRPC sync support to flagd</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/OFEP-flagd-grpc-sync.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="ofep-add-grpc-sync-support-to-flagd">
+<h1>010-OFEP-Add gRPC sync support to flagd<a class="headerlink" href="#ofep-add-grpc-sync-support-to-flagd" title="Permalink to this heading"></a></h1>
+<section id="state-approved">
+<h2>State: APPROVED<a class="headerlink" href="#state-approved" title="Permalink to this heading"></a></h2>
+<p>This OFEP proposes to introduce gRPC syncs to flagd. gRPC sync will act similar to existing remote HTTP URL syncs. But
+going beyond periodic pulls, flagd can utilize gRPC server streaming to receive near real-time updates, pushed from a
+flag management system.</p>
+</section>
+<section id="background">
+<h2>Background<a class="headerlink" href="#background" title="Permalink to this heading"></a></h2>
+<p>gRPC server streaming allows clients to listen and react to server-pushed data. For flagd, this perfectly matches the
+ISync interface and current sync mechanism implementations.</p>
+<p>The gRPC schema will be defined by flagd and supporting flag management system(s) will then implement the contract.</p>
+<p><img alt="unlabelled_image" src="_images/ofep-fd-grpc-1.png" /></p>
+<p>Further, grpc server push can be expanded to have <code class="docutils literal notranslate"><span class="pre">event</span> <span class="pre">types</span></code> such as flag additions, updates and deletions, giving more
+performant connectivity between flagd and flag management system. Performance improvements come from reduced payload
+size(single flag change vs all flags) and not having connection establishment overhead thanks to streaming.</p>
+<p>Note that the implementation complexity of <code class="docutils literal notranslate"><span class="pre">event</span> <span class="pre">types</span></code> lives at grpc server implementation. The implementation may use
+a state management system to derive the matching event type for a specific flag configuration change. In any case,
+flagd must not maintain any state (i.e- flagd must be stateless) and only react on the sync type to update flag
+configurations.</p>
+<p><img alt="unlabelled_image" src="_images/ofep-fd-grpc-2.png" /></p>
+<section id="tasks">
+<h3>Tasks<a class="headerlink" href="#tasks" title="Permalink to this heading"></a></h3>
+<p>Following are the main tasks I am proposing for the implementation.</p>
+<ul class="simple">
+<li><p>[x] POC implementation - https://github.com/open-feature/flagd/pull/297</p></li>
+<li><p>[ ] OFEP approval</p></li>
+<li><p>[ ] Introduce basic grpc sync, with minimal configuration options</p></li>
+<li><p>[ ] Introduce additional options, such as TLS certificates, token authentication on top of existing solution</p></li>
+</ul>
+<section id="ssl-certificates-and-token-authentication">
+<h4>SSL certificates and token authentication<a class="headerlink" href="#ssl-certificates-and-token-authentication" title="Permalink to this heading"></a></h4>
+<p>Consider the GRPC authentication example provided through official Go guide - <a class="reference external" href="https://github.com/grpc/grpc-go/tree/master/examples/features/authentication">Link</a></p>
+<p>With a similar approach, it is possible to establish TLS connections and enable token based authentication/authorization
+between flagd and flag management system.</p>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="OFEP_Index.html" class="btn btn-neutral float-left" title="OFEP Index" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="007-OFEP-provider-flag-metadata.html" class="btn btn-neutral float-right" title="008-OFEP-Surfacing flag metadata" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Mihir Mittal.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

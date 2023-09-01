@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Make flagD a full sub-project of OpenFeature &mdash; OFEP-TESTING 1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="005-OFEP-provider-hook" href="005-OFEP-provider-hook.html" />
+    <link rel="prev" title="006-OFEP-flagd-sockets" href="006-OFEP-flagd-sockets.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            OFEP-TESTING
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">OFEP Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="OFEP_Index.html">OFEP Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OFEP-flagd-grpc-sync.html">010-OFEP-Add gRPC sync support to flagd</a></li>
+<li class="toctree-l1"><a class="reference internal" href="007-OFEP-provider-flag-metadata.html">008-OFEP-Surfacing flag metadata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="001-OFEP-cloud-native-pattern.html">001-OFEP-cloud-native-pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="007-OFEP-flag-change-events.html">007-OFEP-flag-change-events</a></li>
+<li class="toctree-l1"><a class="reference internal" href="007-OFEP-transaction-context-propagation.html">011-OFEP-Transaction Context Propagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OFEP-provider-metadata-capability-discovery.html">016-OFEP-provider-metadata-capability-discovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="004-OFEP-kubernetes-sync-service.html">004-OFEP-inotfiy-interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="003-OFEP-CUE-upstream.html">003-OFEP-CUE-upstream</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OFEP-ofo-flag-service.html">013-OFEP-flag service deployment driven by OpenFeature Operator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OFEP-ofo-flagd-client-support.html">014-OFEP-flagd client support driven by OpenFeature Operator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OFEP-provider-client-mapping.html">015-OFEP-Provider to client mapping</a></li>
+<li class="toctree-l1"><a class="reference internal" href="011-OFEP-sdk-wait-provider-ready.html">OFEP-sdk-wait-provider-ready</a></li>
+<li class="toctree-l1"><a class="reference internal" href="009-OFEP-add-dispose.html">009-OFEP-Add dispose functionality to API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="006-OFEP-flagd-sockets.html">006-OFEP-flagd-sockets</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Make flagD a full sub-project of OpenFeature</a></li>
+<li class="toctree-l1"><a class="reference internal" href="005-OFEP-provider-hook.html">005-OFEP-provider-hook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="000-OFEP-template.html">Name</a></li>
+<li class="toctree-l1"><a class="reference internal" href="002-OFEP-kubecon-demo.html">002-OFEP-kubecon-demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OFEP-single-context-paradigm.html">017-OFEP-single-context-paradigm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OFEP-sdk-e2e-test-strategy.html">SDK end-to-end test strategy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OFEP-inline-evaluation.html">012-OFEP-Inline Evaluation of Flag Rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OFEP-metric-hooks.html">OFEP-hook-for-metrics</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">OFEP-TESTING</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Make flagD a full sub-project of OpenFeature</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/010-OFEP-flagd-project-charter.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="make-flagd-a-full-sub-project-of-openfeature">
+<h1>Make flagD a full sub-project of OpenFeature<a class="headerlink" href="#make-flagd-a-full-sub-project-of-openfeature" title="Permalink to this heading"></a></h1>
+<section id="state-approved">
+<h2>State: APPROVED<a class="headerlink" href="#state-approved" title="Permalink to this heading"></a></h2>
+<p>This OFEP proposes to make flagD a full subproject of OpenFeature. The project will get a dedicated website, documentation, roadmap and charter.</p>
+</section>
+<section id="background">
+<h2>Background<a class="headerlink" href="#background" title="Permalink to this heading"></a></h2>
+<p>flagD started as small reference implementation for a developer-focussed feature evaluation mechanism, enabling OpenFeature SDK users to experiment with an end-to-end solution. Over time the project has grown in functionality and become stable and is now also used in production settings.</p>
+<p>In the past there was also some misunderstanding of the relationship of OpenFeature and flagD.</p>
+<p>Therefore, the project should become a full sub-project of open feature.</p>
+</section>
+<section id="proposal">
+<h2>Proposal<a class="headerlink" href="#proposal" title="Permalink to this heading"></a></h2>
+<p>flagD will become a dedicated sub project of the OpenFeature project. Documentation for flagD and all examples for OpenFeature will be moved to a dedicted space under the newly created domain <code class="docutils literal notranslate"><span class="pre">flagd.dev</span></code>.</p>
+<p>The sub project gets it’s own dedicated charter to ensure the project has clearly defined goals and scope. As a sub project flagD will have its own maintainers but will still be under the governance of the OpenFeature project.</p>
+<p>Below is the charter for flagD as defined by the OpenFeature governance board.</p>
+<section id="charter">
+<h3>Charter<a class="headerlink" href="#charter" title="Permalink to this heading"></a></h3>
+<p>FlagD is an open-source project which provides a portable, lightweight, production-ready, and OpenFeature-compliant feature flag evaluation daemon, along with a supporting k8s operator and set of OpenFeature SDK providers.</p>
+<p>The flagD project aims to provide a developer-focused, cloud-native, lightweight and extensible feature evaluation engine.</p>
+<ul class="simple">
+<li><p><strong>Developer-focused</strong> means that flagD is configured in a declarative approach using “flags-as-code”</p></li>
+<li><p><strong>Cloud-native</strong> means it focuses on seamless, standardised integration with cloud-native tools and practices like GitOps. * These components - like the operator - make the integration easy but are not required.</p></li>
+<li><p><strong>Lightweight</strong> means that flagD provides a compact and executable binary with a design focus on simplicity and ultra-fast, low-latency execution. flagD is implemented as a stateless, highly-scalable service which only requires a local flag definition or a configured endpoint to acquire the definition.</p></li>
+<li><p><strong>Extensible</strong> means that other projects and feature management tools can integrate easily using well-defined interfaces for rule evaluation requests and rule set definition.</p></li>
+<li><p><strong>OpenFeature compliance</strong> means flagd serves as a production-ready reference implementation of the OpenFeature specification and demonstrates the value of an open standard for feature flagging.</p></li>
+</ul>
+<p>The following topics are out of scope for the flagD projects:</p>
+<ul class="simple">
+<li><p>Identity, storage, and attestation mechanisms</p></li>
+<li><p>Distributed architecture ( High availability quorum, voting, leader/follower, failover mechanics)</p></li>
+<li><p>Vendor modules dependencies</p></li>
+<li><p>A feature management and/or analytics solution (but could provide the foundations for one). The project will highlight open-source and commercial implementations which provide these capabilities and are OpenFeature compliant.</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="006-OFEP-flagd-sockets.html" class="btn btn-neutral float-left" title="006-OFEP-flagd-sockets" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="005-OFEP-provider-hook.html" class="btn btn-neutral float-right" title="005-OFEP-provider-hook" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Mihir Mittal.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

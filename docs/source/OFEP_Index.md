@@ -1,11 +1,5 @@
 # OFEP Index
 
-## Active
-
-| Date         | Title | Authors | Tags |
-|--------------|-------|---------|------|
-| 21th Jul 2022 | [000-OFEP-template.md](000-OFEP-template.md) | OFEP Template | Alex Jones | template |
-
 ## Approved
 
 | Date         | Title | Authors | Tags |
@@ -26,6 +20,7 @@
 | 15th Sep 2022 | [004-OFEP-kubernetes-sync-service.md](004-OFEP-kubernetes-sync-service.md) | Inotfiy Interface | Alex Jones | flagd, ofo |
 | 09th Aug 2022 | [006-OFEP-flagd-sockets.md](006-OFEP-flagd-sockets.md) | Flagd Sockets | Alex Jones | flagd |
 | 30th Jul 2022 | [005-OFEP-provider-hook.md](005-OFEP-provider-hook.md) | Provider Hook | Shantanu Sen | sdk |
+| 21th Jul 2022 | [000-OFEP-template.md](000-OFEP-template.md) | OFEP Template | Alex Jones | template |
 | 12th Jul 2022 | [001-OFEP-cloud-native-pattern.md](001-OFEP-cloud-native-pattern.md) | Cloud Native Pattern | Alex Jones | cloud-native |
 | 12th Jul 2022 | [002-OFEP-kubecon-demo.md](002-OFEP-kubecon-demo.md) | Kubecon Demo | Alex Jones | flagd, ofo |
 
@@ -46,4 +41,9 @@
 | Date         | Title | Authors | Tags |
 |--------------|-------|---------|------|
 | 24th Mar 2023 | [OFEP-ofo-flagd-client-support.md](OFEP-ofo-flagd-client-support.md) | Flagd Client Support driven by OFO | Skye Gill | flagd, ofo |
+
+## Pending Review
+
+| Date         | Title | Authors | Tags |
+|--------------|-------|---------|------|
 
