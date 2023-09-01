@@ -17,7 +17,6 @@ def parse_frontmatter(md_content):
 # Initialize data structures to store categorized OFEPs
 status_to_ofeps = {
     'Approved': [],
-    'Draft': [],
     'Rejected': [],
     'Withdrawn': [],
     'Pending Review': [],
@@ -53,8 +52,8 @@ index_content += "\n"
 
 for status, ofeps in status_to_ofeps.items():
     index_content += f"## {status}\n\n"
-    index_content += "| Date         | Title | Authors | Tags |\n"
-    index_content += "|--------------|-------|---------|------|\n"
+    index_content += "| Last Modified | Title | Authors | Tags |\n"
+    index_content += "|---------------|-------|---------|------|\n"
 
     for date_obj, title, authors_list, tags_list, filename in ofeps:
         formatted_date = date_obj.strftime('%dth %b %Y')  # Format as "25th May 2023"
