@@ -12,6 +12,15 @@ import sys
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 
+from docutils import nodes
+
+def setup(app):
+    app.add_role('ref', ref_role)
+
+def ref_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
+    return [nodes.reference(rawtext, text, refuri=text, **options)], []
+
+
 # Now import the module
 # import ofep_sphinx_extension
 
@@ -44,8 +53,8 @@ if not os.path.exists('_build'):
     os.makedirs('_build')
 
 python_executable = '/bin/python3'  # Replace with the full path to the Python interpreter
-os.system(f'{python_executable} {index_gen_path}')
 os.system(f'{python_executable} {copy_files_path}')
+os.system(f'{python_executable} {index_gen_path}')
 # os.system(f'{python_executable} {copy_files_path}')
 # os.system(f'{python_executable} {generate_ofep_docs_path}')
 
@@ -70,6 +79,7 @@ os.system(f'{python_executable} {copy_files_path}')
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
+source_suffix = ['.rst', '.md']
 
 
 templates_path = ['_templates']
