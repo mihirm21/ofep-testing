@@ -36,18 +36,18 @@ extensions = [
 ]
 # -- Custom script execution -------------------------------------------------
 # copy_files_path = os.path.join(parent_dir,'docs', 'copy_files.py')  # Update this path
-index_gen_path = os.path.join(parent_dir,'docs', 'index_gen.py')  # Update this path
+index_gen_path = os.path.join(parent_dir,'docs', 'index_gen1.py')  # Update this path
 copy_files_path = os.path.join(parent_dir,'docs', 'copy_files.py')  # Update this path
-generate_ofep_docs_path = os.path.join(parent_dir,'docs', 'generate_ofep_docs_rst.py')  # Update this path
+# generate_ofep_docs_path = os.path.join(parent_dir,'docs', 'generate_ofep_docs_rst.py')  # Update this path
 
 if not os.path.exists('_build'):
     os.makedirs('_build')
 
 python_executable = '/bin/python3'  # Replace with the full path to the Python interpreter
-os.system(f'{python_executable} {copy_files_path}')
 os.system(f'{python_executable} {index_gen_path}')
 os.system(f'{python_executable} {copy_files_path}')
-os.system(f'{python_executable} {generate_ofep_docs_path}')
+# os.system(f'{python_executable} {copy_files_path}')
+# os.system(f'{python_executable} {generate_ofep_docs_path}')
 
 # -- Other settings ----------------------------------------------------------
 # ...
