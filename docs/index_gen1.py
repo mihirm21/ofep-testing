@@ -33,9 +33,9 @@ if not os.path.exists(script_directory):
 # Get the list of OFEP files in the source directory
 ofep_files = [file for file in os.listdir(source_directory) if file.endswith('.md') and file != 'OFEP-template.md']
 
-# Generate the content for ofep_docs.rst
+# Generate the toctree for index.rst
 content = 'Welcome to OFEP-TESTING documentation \n========================================\n .. toctree::\n   :titlesonly:\n   :maxdepth: 1\n   :hidden:\n   :caption: OFEP Documentation\n\n   '
-# content += '\n   OFEP_Index.md\n   '
+
 content += '\n   '.join([ofep_file[:-3] for ofep_file in ofep_files])
 
 # Iterate through the files in the OFEP directory
@@ -75,7 +75,7 @@ for status, ofeps in status_to_ofeps.items():
 
     for date_obj, title, authors_list, tags_list, filename in ofeps:
         formatted_date = date_obj.strftime('%dth %b %Y')  # Format as "25th May 2023"
-        title_link = f"`{title} <{filename.replace('.md', '.html')}>`_"  # Link to the file with just the filename
+        title_link = f"`{title} <{filename.replace('.md', '.html')}>`_"
         index_content += f"   * - {formatted_date}\n"
         index_content += f"     - {title_link}\n"
         index_content += f"     - {authors_list}\n"

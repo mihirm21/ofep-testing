@@ -14,16 +14,7 @@ destination_subdirectory = os.path.join(destination_directory, 'images')
 if not os.path.exists(destination_directory):
     os.makedirs(destination_directory)
 
-# for filename in os.listdir(destination_directory):
-#     if filename=='OFEP_Index.md':
-#         source_file_path = os.path.join(destination_directory, filename)
-#         destination_file_path = os.path.join(source_directory, filename)
-#         if os.path.exists(destination_file_path):
-#             os.remove(destination_file_path)
-#         shutil.copy2(source_file_path, destination_file_path)
-#         print(f"Copied {source_file_path} to {destination_file_path}")
-
-# Iterate through the files in the root directory
+# Copy the ofeps from OFEP directory to docs/source
 for filename in os.listdir(source_directory):
     if filename.endswith('.md') and filename.find('template')==-1 and filename.find('index')==-1:
         source_file_path = os.path.join(source_directory, filename)
@@ -36,6 +27,7 @@ for filename in os.listdir(source_directory):
 print("Copying completed.")
 
 
+# copy the images subdirectory from OFEP to docs/source
 if not os.path.exists(destination_subdirectory):
     os.makedirs(destination_subdirectory)
 
