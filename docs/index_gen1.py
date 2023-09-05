@@ -75,7 +75,7 @@ for status, ofeps in status_to_ofeps.items():
 
     for date_obj, title, authors_list, tags_list, filename in ofeps:
         formatted_date = date_obj.strftime('%dth %b %Y')  # Format as "25th May 2023"
-        title_link = f"`{title} <{filename}>`_"  # Link to the file with just the filename
+        title_link = f"`{title} <{filename.replace('.md', '.html')}>`_"  # Link to the file with just the filename
         index_content += f"   * - {formatted_date}\n"
         index_content += f"     - {title_link}\n"
         index_content += f"     - {authors_list}\n"
